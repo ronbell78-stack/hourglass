@@ -2,85 +2,119 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Order in Chaos</title>
 
   <style>
+    :root {
+      --bg-top: #05080d;
+      --bg-bottom: #0b1220;
+      --core: #6fa8ff;
+      --core-dim: #3a5f99;
+      --text-main: #e6e9ef;
+      --text-muted: #9aa3b2;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      padding: 0;
-      background: radial-gradient(circle at top, #0b1220 0%, #05080f 70%);
-      color: #eaeaea;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       height: 100vh;
+      background: radial-gradient(circle at top, var(--bg-bottom), var(--bg-top));
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   Roboto, Helvetica, Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
     }
 
     .container {
-      max-width: 720px;
-      padding: 24px;
+      max-width: 680px;
+      padding: 32px;
     }
 
+    /* FRACTURE MARK */
     .fracture {
-      margin-bottom: 32px;
+      width: 96px;
+      height: 180px;
+      margin: 0 auto 28px;
+      position: relative;
+      filter: drop-shadow(0 0 18px rgba(111,168,255,0.35));
+    }
+
+    .fracture::before,
+    .fracture::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 46%;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.06),
+        rgba(255,255,255,0.02)
+      );
+      border-radius: 4px;
+    }
+
+    .fracture::before {
+      left: 0;
+      clip-path: polygon(0 0, 100% 8%, 80% 48%, 100% 92%, 0 100%);
+    }
+
+    .fracture::after {
+      right: 0;
+      clip-path: polygon(0 8%, 100% 0, 100% 100%, 0 92%, 20% 48%);
+    }
+
+    .fracture-line {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        transparent,
+        var(--core),
+        transparent
+      );
+      transform: translateX(-50%);
+      box-shadow:
+        0 0 12px rgba(111,168,255,0.9),
+        0 0 28px rgba(111,168,255,0.4);
     }
 
     h1 {
-      font-size: 1.6rem;
-      letter-spacing: 0.25em;
-      margin: 0 0 12px 0;
+      margin: 0 0 18px;
+      font-size: 1.9rem;
+      letter-spacing: 0.32em;
+      font-weight: 500;
     }
 
     .tagline {
-      opacity: 0.8;
-      margin-bottom: 28px;
-      font-size: 1rem;
-    }
-
-    .human {
       font-size: 1.05rem;
-      opacity: 0.95;
-      margin-bottom: 42px;
-      line-height: 1.4;
+      color: var(--text-muted);
+      margin-bottom: 34px;
     }
 
-    .enter {
-      display: inline-block;
-      padding: 12px 28px;
-      border: 1px solid rgba(110,203,255,0.6);
-      color: #6ecbff;
-      text-decoration: none;
-      letter-spacing: 0.12em;
-      transition: all 0.3s ease;
-    }
-
-    .enter:hover {
-      background: rgba(110,203,255,0.12);
-      border-color: #6ecbff;
+    .creed {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      opacity: 0.85;
     }
   </style>
 </head>
 
 <body>
   <div class="container">
-
     <div class="fracture">
-      <!-- Fracture Mark -->
-      <svg width="120" height="240" viewBox="0 0 120 240" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="fractureGlow" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#6ecbff"/>
-            <stop offset="100%" stop-color="#1e4cff"/>
-          </linearGradient>
-        </defs>
-
-        <path d="M60 10 L82 118 L56 130 L78 228 L60 240 L38 130 L64 118 Z"
-              fill="url(#fractureGlow)"
-              opacity="0.9"/>
-      </svg>
+      <div class="fracture-line"></div>
     </div>
 
     <h1>ORDER IN CHAOS</h1>
@@ -89,15 +123,9 @@
       Controlled chaos. Engineered order.
     </div>
 
-    <div class="human">
-      This was built by someone like you,<br>
-      for someone like you.
+    <div class="creed">
+      Built by someone like you — for someone like you.
     </div>
-
-    <a class="enter" href="./system/">
-      ENTER →
-    </a>
-
   </div>
 </body>
 </html>
