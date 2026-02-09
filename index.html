@@ -7,12 +7,12 @@
 
   <style>
     :root {
-      --bg-top: #05080d;
-      --bg-bottom: #0b1220;
-      --core: #6fa8ff;
-      --core-dim: #3a5f99;
-      --text-main: #e6e9ef;
-      --text-muted: #9aa3b2;
+      --bg-dark: #05070a;
+      --bg-mid: #0a1220;
+      --stone: #1b2430;
+      --fracture-glow: #3aa6ff;
+      --text-main: #e6ecf2;
+      --text-subtle: #9fb3c8;
     }
 
     * {
@@ -21,136 +21,112 @@
 
     body {
       margin: 0;
-      height: 100vh;
-      background: radial-gradient(circle at top, var(--bg-bottom), var(--bg-top));
+      padding: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top, var(--bg-mid), var(--bg-dark) 70%);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       color: var(--text-main);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-                   Roboto, Helvetica, Arial, sans-serif;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      overflow: hidden;
     }
 
     .container {
-      max-width: 680px;
-      padding: 32px;
+      max-width: 720px;
+      padding: 40px 20px;
     }
 
-    /* FRACTURE MARK */
-    .fracture {
-      width: 96px;
-      height: 180px;
-      margin: 0 auto 28px;
+    /* === FRACTURE MARK === */
+
+    .fracture-mark {
       position: relative;
-      filter: drop-shadow(0 0 18px rgba(111,168,255,0.25));
-      animation: pressure 9s ease-in-out infinite;
-    }
-
-    .fracture::before,
-    .fracture::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      width: 46%;
-      height: 100%;
+      width: 64px;
+      height: 180px;
+      margin: 0 auto 48px auto;
       background: linear-gradient(
-        to bottom,
-        rgba(255,255,255,0.06),
-        rgba(255,255,255,0.02)
+        180deg,
+        #202a36,
+        #121922
       );
       border-radius: 4px;
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.05),
+        0 40px 80px rgba(0,0,0,0.6);
+      overflow: hidden;
     }
 
-    .fracture::before {
-      left: 0;
-      clip-path: polygon(0 0, 100% 8%, 78% 48%, 100% 92%, 0 100%);
-    }
-
-    .fracture::after {
-      right: 0;
-      clip-path: polygon(0 8%, 100% 0, 100% 100%, 0 92%, 22% 48%);
-    }
-
-    .fracture-line {
+    /* fracture seam */
+    .fracture-mark::before {
+      content: "";
       position: absolute;
-      top: 0;
+      top: -10%;
       left: 50%;
       width: 2px;
-      height: 100%;
-      transform: translateX(-50%);
+      height: 120%;
+      transform: translateX(-50%) rotate(-6deg);
       background: linear-gradient(
-        to bottom,
-        transparent,
-        var(--core),
-        transparent
+        180deg,
+        rgba(58,166,255,0),
+        rgba(58,166,255,0.9),
+        rgba(58,166,255,0)
       );
       box-shadow:
-        0 0 10px rgba(111,168,255,0.6),
-        0 0 24px rgba(111,168,255,0.3);
-      animation: drift 14s linear infinite;
+        0 0 12px rgba(58,166,255,0.8),
+        0 0 32px rgba(58,166,255,0.6);
     }
 
-    /* MOTION — NOT ANIMATION */
-    @keyframes pressure {
-      0%   { transform: scaleY(1); }
-      50%  { transform: scaleY(1.025); }
-      100% { transform: scaleY(1); }
+    /* subtle internal energy pulse */
+    .fracture-mark::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          ellipse at center,
+          rgba(58,166,255,0.12),
+          rgba(58,166,255,0) 65%
+        );
+      animation: pulse 6s ease-in-out infinite;
     }
 
-    @keyframes drift {
-      0%   { opacity: 0.55; }
-      50%  { opacity: 0.9; }
-      100% { opacity: 0.55; }
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 0.4;
+      }
+      50% {
+        opacity: 0.9;
+      }
     }
+
+    /* === TEXT === */
 
     h1 {
-      margin: 0 0 18px;
-      font-size: 1.9rem;
-      letter-spacing: 0.32em;
+      letter-spacing: 0.28em;
       font-weight: 500;
+      font-size: 1.6rem;
+      margin-bottom: 16px;
     }
 
     .tagline {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      margin-bottom: 34px;
-    }
-
-    .creed {
       font-size: 0.95rem;
-      color: var(--text-muted);
-      letter-spacing: 0.04em;
-      opacity: 0.85;
+      color: var(--text-subtle);
+      margin-bottom: 28px;
     }
 
-    /* LOAD PRESENCE */
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(
-        circle at center,
-        rgba(111,168,255,0.06),
-        transparent 60%
-      );
-      opacity: 0;
-      animation: arrival 2.4s ease forwards;
-      pointer-events: none;
+    .human-line {
+      font-size: 0.9rem;
+      color: rgba(230,236,242,0.75);
     }
 
-    @keyframes arrival {
-      to { opacity: 1; }
-    }
   </style>
 </head>
 
 <body>
   <div class="container">
-    <div class="fracture">
-      <div class="fracture-line"></div>
-    </div>
+
+    <div class="fracture-mark" aria-hidden="true"></div>
 
     <h1>ORDER IN CHAOS</h1>
 
@@ -158,9 +134,10 @@
       Controlled chaos. Engineered order.
     </div>
 
-    <div class="creed">
+    <div class="human-line">
       Built by someone like you — for someone like you.
     </div>
+
   </div>
 </body>
 </html>
