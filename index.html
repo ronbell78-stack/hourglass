@@ -50,7 +50,6 @@
       opacity: 0.6;
     }
 
-    /* subtle ambient presence */
     svg {
       filter:
         drop-shadow(0 40px 80px rgba(0,0,0,0.6))
@@ -62,7 +61,7 @@
 <body>
   <div class="container">
 
-    <!-- FRACTURE MARK — FINAL, CODED -->
+    <!-- FRACTURE MARK — FINAL, CODED SVG -->
     <svg
       width="90"
       height="240"
@@ -71,13 +70,13 @@
       aria-label="Order in Chaos — Fracture Mark"
     >
       <defs>
-        <!-- stone gradient -->
+        <!-- Stone gradient -->
         <linearGradient id="stoneGrad" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="#202a36"/>
           <stop offset="100%" stop-color="#121922"/>
         </linearGradient>
 
-        <!-- contained energy glow -->
+        <!-- Contained energy glow -->
         <linearGradient id="fractureGlow" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="rgba(120,190,255,0)"/>
           <stop offset="50%" stop-color="rgba(120,190,255,0.9)"/>
@@ -93,7 +92,7 @@
         </filter>
       </defs>
 
-      <!-- stone monolith -->
+      <!-- Stone monolith -->
       <rect
         x="12"
         y="0"
@@ -103,7 +102,7 @@
         fill="url(#stoneGrad)"
       />
 
-      <!-- fracture line -->
+      <!-- Fracture seam -->
       <path
         d="M45 10 L42 80 L48 140 L44 220"
         stroke="url(#fractureGlow)"
