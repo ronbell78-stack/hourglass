@@ -4,11 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Order in Chaos</title>
+
   <style>
     body {
       margin: 0;
       padding: 0;
-      background: #0a0a0a;
+      background: radial-gradient(circle at top, #0b1220 0%, #05080f 70%);
       color: #eaeaea;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       display: flex;
@@ -17,42 +18,86 @@
       height: 100vh;
       text-align: center;
     }
+
     .container {
-      max-width: 640px;
-      padding: 20px;
+      max-width: 720px;
+      padding: 24px;
     }
+
+    .fracture {
+      margin-bottom: 32px;
+    }
+
     h1 {
+      font-size: 1.6rem;
       letter-spacing: 0.25em;
-      margin-bottom: 12px;
+      margin: 0 0 12px 0;
     }
-    p {
+
+    .tagline {
       opacity: 0.8;
-      line-height: 1.6;
+      margin-bottom: 28px;
+      font-size: 1rem;
     }
-    a {
+
+    .human {
+      font-size: 1.05rem;
+      opacity: 0.95;
+      margin-bottom: 42px;
+      line-height: 1.4;
+    }
+
+    .enter {
       display: inline-block;
-      margin-top: 28px;
       padding: 12px 28px;
-      border: 1px solid #eaeaea;
-      color: #eaeaea;
+      border: 1px solid rgba(110,203,255,0.6);
+      color: #6ecbff;
       text-decoration: none;
-      transition: background 0.2s ease;
+      letter-spacing: 0.12em;
+      transition: all 0.3s ease;
     }
-    a:hover {
-      background: #eaeaea;
-      color: #0a0a0a;
+
+    .enter:hover {
+      background: rgba(110,203,255,0.12);
+      border-color: #6ecbff;
     }
   </style>
 </head>
+
 <body>
   <div class="container">
+
+    <div class="fracture">
+      <!-- Fracture Mark -->
+      <svg width="120" height="240" viewBox="0 0 120 240" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="fractureGlow" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#6ecbff"/>
+            <stop offset="100%" stop-color="#1e4cff"/>
+          </linearGradient>
+        </defs>
+
+        <path d="M60 10 L82 118 L56 130 L78 228 L60 240 L38 130 L64 118 Z"
+              fill="url(#fractureGlow)"
+              opacity="0.9"/>
+      </svg>
+    </div>
+
     <h1>ORDER IN CHAOS</h1>
-    <p>Chaos exposes. Discipline controls. Strategy wins.</p>
-    <p>
-      Order in Chaos is a doctrine-driven platform for decision-making
-      in environments where mistakes compound and emotion distorts judgment.
-    </p>
-    <a href="./system/">Enter Hourglass →</a>
+
+    <div class="tagline">
+      Controlled chaos. Engineered order.
+    </div>
+
+    <div class="human">
+      This was built by someone like you,<br>
+      for someone like you.
+    </div>
+
+    <a class="enter" href="./system/">
+      ENTER →
+    </a>
+
   </div>
 </body>
 </html>
