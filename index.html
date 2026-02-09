@@ -30,6 +30,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
+      overflow: hidden;
     }
 
     .container {
@@ -43,7 +44,8 @@
       height: 180px;
       margin: 0 auto 28px;
       position: relative;
-      filter: drop-shadow(0 0 18px rgba(111,168,255,0.35));
+      filter: drop-shadow(0 0 18px rgba(111,168,255,0.25));
+      animation: pressure 9s ease-in-out infinite;
     }
 
     .fracture::before,
@@ -63,12 +65,12 @@
 
     .fracture::before {
       left: 0;
-      clip-path: polygon(0 0, 100% 8%, 80% 48%, 100% 92%, 0 100%);
+      clip-path: polygon(0 0, 100% 8%, 78% 48%, 100% 92%, 0 100%);
     }
 
     .fracture::after {
       right: 0;
-      clip-path: polygon(0 8%, 100% 0, 100% 100%, 0 92%, 20% 48%);
+      clip-path: polygon(0 8%, 100% 0, 100% 100%, 0 92%, 22% 48%);
     }
 
     .fracture-line {
@@ -77,16 +79,30 @@
       left: 50%;
       width: 2px;
       height: 100%;
+      transform: translateX(-50%);
       background: linear-gradient(
         to bottom,
         transparent,
         var(--core),
         transparent
       );
-      transform: translateX(-50%);
       box-shadow:
-        0 0 12px rgba(111,168,255,0.9),
-        0 0 28px rgba(111,168,255,0.4);
+        0 0 10px rgba(111,168,255,0.6),
+        0 0 24px rgba(111,168,255,0.3);
+      animation: drift 14s linear infinite;
+    }
+
+    /* MOTION — NOT ANIMATION */
+    @keyframes pressure {
+      0%   { transform: scaleY(1); }
+      50%  { transform: scaleY(1.025); }
+      100% { transform: scaleY(1); }
+    }
+
+    @keyframes drift {
+      0%   { opacity: 0.55; }
+      50%  { opacity: 0.9; }
+      100% { opacity: 0.55; }
     }
 
     h1 {
@@ -107,6 +123,25 @@
       color: var(--text-muted);
       letter-spacing: 0.04em;
       opacity: 0.85;
+    }
+
+    /* LOAD PRESENCE */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(
+        circle at center,
+        rgba(111,168,255,0.06),
+        transparent 60%
+      );
+      opacity: 0;
+      animation: arrival 2.4s ease forwards;
+      pointer-events: none;
+    }
+
+    @keyframes arrival {
+      to { opacity: 1; }
     }
   </style>
 </head>
