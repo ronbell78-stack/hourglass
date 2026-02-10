@@ -1,74 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Order in Chaos</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Order in Chaos</title>
 
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      background: radial-gradient(circle at center, #0a1a3a 0%, #030712 70%);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: #bcdcff;
-    }
+<style>
+:root {
+  --bg-deep: #030712;
+  --bg-mid: #071a3a;
+  --energy-core: #8fdcff;
+  --energy-glow: rgba(120, 200, 255, 0.6);
+  --text-main: #d8efff;
+}
 
-    body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background:
+    radial-gradient(circle at center, var(--bg-mid) 0%, var(--bg-deep) 75%);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text-main);
+  overflow-x: hidden;
+}
 
-    .container {
-      text-align: center;
-    }
+body {
+  scroll-behavior: smooth;
+}
 
-    .fracture-wrapper {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 40px;
-    }
+/* ---- HERO SECTION ---- */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
 
-    .fracture-mark {
-      width: 260px;
-      max-width: 80vw;
-      filter:
-        drop-shadow(0 0 25px rgba(0, 170, 255, 0.55))
-        drop-shadow(0 0 60px rgba(0, 140, 255, 0.35));
-    }
+.container {
+  position: relative;
+}
 
-    h1 {
-      font-size: 2.4rem;
-      letter-spacing: 0.35em;
-      font-weight: 300;
-      margin: 0 0 16px 0;
-      color: #cfe9ff;
-    }
+/* ---- FRACTURE ---- */
+.fracture-wrapper {
+  position: relative;
+  width: 280px;
+  max-width: 80vw;
+  margin: 0 auto 48px;
+  animation: drift 10s ease-in-out infinite;
+}
 
-    .tagline {
-      font-size: 1rem;
-      opacity: 0.85;
-      margin-bottom: 10px;
-    }
+.fracture-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background:
+    radial-gradient(circle at center,
+      rgba(120, 200, 255, 0.25),
+      transparent 70%);
+  filter: blur(50px);
+  z-index: 0;
+  animation: pulse 6s ease-in-out infinite;
+}
 
-    .subtle {
-      font-size: 0.9rem;
-      opacity: 0.6;
-    }
-  </style>
+.fracture-mark {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+
+  -webkit-mask-image: radial-gradient(circle at center, black 55%, transparent 80%);
+  mask-image: radial-gradient(circle at center, black 55%, transparent 80%);
+
+  filter:
+    drop-shadow(0 0 25px var(--energy-glow))
+    drop-shadow(0 0 60px rgba(0,140,255,0.35));
+}
+
+/* ---- TEXT ---- */
+h1 {
+  font-size: 2.4rem;
+  letter-spacing: 0.35em;
+  font-weight: 300;
+  margin: 0 0 18px;
+  animation: textPulse 6s ease-in-out infinite;
+}
+
+.tagline {
+  font-size: 1rem;
+  opacity: 0.85;
+  margin-bottom: 10px;
+}
+
+.subtle {
+  font-size: 0.9rem;
+  opacity: 0.6;
+}
+
+/* ---- SCROLL CUE ---- */
+.scroll-cue {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.8rem;
+  opacity: 0.45;
+}
+
+/* ---- SECOND SECTION ---- */
+.section {
+  min-height: 100vh;
+  padding: 120px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at top, #06142c, #02040a);
+}
+
+.section-content {
+  max-width: 640px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.section-content.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section h2 {
+  letter-spacing: 0.25em;
+  font-weight: 300;
+  margin-bottom: 24px;
+}
+
+.section p {
+  line-height: 1.7;
+  opacity: 0.85;
+}
+
+/* ---- ANIMATIONS ---- */
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes drift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes textPulse {
+  0%, 100% { text-shadow: 0 0 0 rgba(0,0,0,0); }
+  50% { text-shadow: 0 0 18px rgba(120,200,255,0.35); }
+}
+
+/* ---- GRAIN ---- */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    repeating-radial-gradient(
+      circle at center,
+      rgba(255,255,255,0.015) 0px,
+      rgba(255,255,255,0.015) 1px,
+      transparent 2px,
+      transparent 4px
+    );
+  opacity: 0.35;
+  mix-blend-mode: overlay;
+}
+</style>
 </head>
 
 <body>
+
+<section class="hero">
   <div class="container">
     <div class="fracture-wrapper">
-      <img
-        src="assets/Fracture-mark-hero-png.png"
-        alt="Fracture Mark"
-        class="fracture-mark"
-      />
+      <img src="assets/Fracture-mark-hero-png.png"
+           alt="Fracture Mark"
+           class="fracture-mark">
     </div>
 
     <h1>ORDER IN CHAOS</h1>
@@ -81,5 +199,37 @@
       Built by someone like you — for someone like you.
     </div>
   </div>
+
+  <div class="scroll-cue">↓ enter</div>
+</section>
+
+<section class="section">
+  <div class="section-content" id="reveal">
+    <h2>THE DOCTRINE</h2>
+    <p>
+      Order does not eliminate chaos.  
+      It survives inside it.
+      <br><br>
+      This system was not designed for obedience.
+      It was built for clarity under pressure.
+    </p>
+  </div>
+</section>
+
+<script>
+const reveal = document.getElementById("reveal");
+
+const observer = new IntersectionObserver(
+  ([entry]) => {
+    if (entry.isIntersecting) {
+      reveal.classList.add("visible");
+    }
+  },
+  { threshold: 0.4 }
+);
+
+observer.observe(reveal);
+</script>
+
 </body>
 </html>
