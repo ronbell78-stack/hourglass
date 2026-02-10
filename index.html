@@ -1,158 +1,126 @@
-<!-- FORCE PAGES REBUILD -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Order in Chaos</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Order in Chaos</title>
 
-  <style>
-    :root {
-      --blue-core: #4fd1ff;
-      --blue-glow: rgba(79, 209, 255, 0.45);
-      --bg-deep: #05070d;
-    }
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: #05070c;
+  overflow: hidden;
+}
 
-    * {
-      box-sizing: border-box;
-    }
+/* --- STONE FIELD --- */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at top, rgba(30,40,90,0.35), transparent 55%),
+    linear-gradient(180deg, #06080f, #02030a),
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.02) 0px,
+      rgba(255,255,255,0.02) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+  filter: contrast(1.1) brightness(0.9);
+  z-index: 0;
+}
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: radial-gradient(circle at center, #0b1630 0%, var(--bg-deep) 70%);
-      color: #e6f6ff;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      overflow-x: hidden;
-    }
+/* --- STAR DUST --- */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.15), transparent),
+    radial-gradient(1px 1px at 70% 60%, rgba(255,255,255,0.12), transparent),
+    radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,0.1), transparent);
+  opacity: 0.35;
+  z-index: 1;
+}
 
-    /* --- HERO --- */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      text-align: center;
-    }
+/* --- LAYOUT --- */
+.wrapper {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #dfe6ff;
+}
 
-    /* --- FRACTURE IMAGE --- */
-    .fracture-wrapper {
-      position: relative;
-      margin-bottom: 3rem;
-    }
+/* --- FRACTURE MARK --- */
+.fracture {
+  position: relative;
+  width: 6px;
+  height: 180px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    #8fd6ff,
+    #cfffff,
+    #8fd6ff,
+    transparent
+  );
+  box-shadow:
+    0 0 30px rgba(120,190,255,0.9),
+    0 0 80px rgba(60,120,255,0.6);
+  margin-bottom: 30px;
+}
 
-    .fracture-wrapper::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background: radial-gradient(circle, var(--blue-glow) 0%, transparent 60%);
-      filter: blur(60px);
-      z-index: 0;
-      animation: pulse 6s ease-in-out infinite;
-    }
+.fracture::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 26px;
+  height: 26px;
+  transform: translate(-50%, -50%) rotate(45deg);
+  background: linear-gradient(135deg, #cfffff, #7bbcff);
+  box-shadow:
+    0 0 40px rgba(150,220,255,1),
+    0 0 90px rgba(90,150,255,0.9);
+}
 
-    .fracture {
-      position: relative;
-      width: 260px;
-      max-width: 60vw;
-      animation: drift 8s ease-in-out infinite;
-      z-index: 1;
-      filter: drop-shadow(0 0 30px var(--blue-glow));
-    }
+/* --- TEXT --- */
+.title {
+  font-size: 22px;
+  letter-spacing: 0.35em;
+  margin-top: 10px;
+}
 
-    /* --- TEXT --- */
-    h1 {
-      letter-spacing: 0.35em;
-      font-weight: 500;
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
-      margin: 0 0 1rem 0;
-      animation: textGlow 6s ease-in-out infinite;
-    }
+.tagline {
+  margin-top: 14px;
+  font-size: 15px;
+  opacity: 0.85;
+}
 
-    .tagline {
-      opacity: 0.85;
-      font-size: 1rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .subtag {
-      opacity: 0.6;
-      font-size: 0.95rem;
-    }
-
-    /* --- SECOND SECTION --- */
-    .section {
-      min-height: 100vh;
-      padding: 20vh 10vw;
-      background: linear-gradient(to bottom, transparent, #02040a);
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 1.2s ease, transform 1.2s ease;
-    }
-
-    .section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* --- ANIMATIONS --- */
-    @keyframes pulse {
-      0%, 100% { opacity: 0.6; }
-      50% { opacity: 1; }
-    }
-
-    @keyframes drift {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-
-    @keyframes textGlow {
-      0%, 100% { text-shadow: 0 0 10px rgba(79,209,255,0.25); }
-      50% { text-shadow: 0 0 25px rgba(79,209,255,0.6); }
-    }
-  </style>
+.subline {
+  margin-top: 10px;
+  font-size: 13px;
+  opacity: 0.55;
+}
+</style>
 </head>
 
 <body>
+  <div class="wrapper">
+    <div class="fracture"></div>
 
-  <section class="hero">
-    <div class="fracture-wrapper">
-      <img
-        src="./assets/Fracture-mark-hero-png.png"
-        alt="Fracture Mark"
-        class="fracture"
-      />
-    </div>
-
-    <h1>ORDER IN CHAOS</h1>
+    <div class="title">ORDER IN CHAOS</div>
     <div class="tagline">Controlled chaos. Engineered order.</div>
-    <div class="subtag">Built by someone like you — for someone like you.</div>
-  </section>
-
-  <section class="section" id="next">
-    <h2>Operation Hourglass</h2>
-    <p>
-      This system exists to impose structure where pressure breaks form.
-      It is not guidance. It is alignment.
-    </p>
-  </section>
-
-  <script>
-    const section = document.querySelector('.section');
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.25 });
-
-    observer.observe(section);
-  </script>
-
+    <div class="subline">Built by someone like you — for someone like you.</div>
+  </div>
 </body>
 </html>
