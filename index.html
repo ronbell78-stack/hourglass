@@ -1,126 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Order in Chaos</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Order in Chaos</title>
 
-  <style>
-    :root {
-      --bg-deep: #05070c;
-      --bg-mid: #0b1220;
-      --glow-core: #4cc9ff;
-      --glow-soft: rgba(76, 201, 255, 0.25);
-      --text-main: #eaeaea;
-      --text-muted: rgba(234, 234, 234, 0.65);
-    }
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: #05070c;
+  overflow: hidden;
+}
 
-    * {
-      box-sizing: border-box;
-    }
+/* --- STONE FIELD --- */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at top, rgba(30,40,90,0.35), transparent 55%),
+    linear-gradient(180deg, #06080f, #02030a),
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.02) 0px,
+      rgba(255,255,255,0.02) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+  filter: contrast(1.1) brightness(0.9);
+  z-index: 0;
+}
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      background: radial-gradient(circle at top, var(--bg-mid), var(--bg-deep) 70%);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: var(--text-main);
-    }
+/* --- STAR DUST --- */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.15), transparent),
+    radial-gradient(1px 1px at 70% 60%, rgba(255,255,255,0.12), transparent),
+    radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,0.1), transparent);
+  opacity: 0.35;
+  z-index: 1;
+}
 
-    body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
+/* --- LAYOUT --- */
+.wrapper {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #dfe6ff;
+}
 
-    .stage {
-      text-align: center;
-      max-width: 720px;
-      padding: 40px 20px;
-    }
+/* --- FRACTURE MARK --- */
+.fracture {
+  position: relative;
+  width: 6px;
+  height: 180px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    #8fd6ff,
+    #cfffff,
+    #8fd6ff,
+    transparent
+  );
+  box-shadow:
+    0 0 30px rgba(120,190,255,0.9),
+    0 0 80px rgba(60,120,255,0.6);
+  margin-bottom: 30px;
+}
 
-    /* FRACTURE MARK */
-    .fracture {
-      position: relative;
-      width: 48px;
-      height: 180px;
-      margin: 0 auto 36px;
-    }
+.fracture::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 26px;
+  height: 26px;
+  transform: translate(-50%, -50%) rotate(45deg);
+  background: linear-gradient(135deg, #cfffff, #7bbcff);
+  box-shadow:
+    0 0 40px rgba(150,220,255,1),
+    0 0 90px rgba(90,150,255,0.9);
+}
 
-    .fracture::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to bottom,
-        transparent 0%,
-        var(--glow-core) 50%,
-        transparent 100%
-      );
-      clip-path: polygon(
-        45% 0%,
-        55% 0%,
-        52% 40%,
-        70% 50%,
-        52% 60%,
-        55% 100%,
-        45% 100%,
-        48% 60%,
-        30% 50%,
-        48% 40%
-      );
-      filter: drop-shadow(0 0 12px var(--glow-core));
-      animation: pulse 4s ease-in-out infinite;
-    }
+/* --- TEXT --- */
+.title {
+  font-size: 22px;
+  letter-spacing: 0.35em;
+  margin-top: 10px;
+}
 
-    @keyframes pulse {
-      0%, 100% {
-        opacity: 0.65;
-        filter: drop-shadow(0 0 10px var(--glow-soft));
-      }
-      50% {
-        opacity: 1;
-        filter: drop-shadow(0 0 22px var(--glow-core));
-      }
-    }
+.tagline {
+  margin-top: 14px;
+  font-size: 15px;
+  opacity: 0.85;
+}
 
-    h1 {
-      letter-spacing: 0.32em;
-      font-weight: 500;
-      font-size: 1.4rem;
-      margin: 0 0 14px;
-    }
-
-    .tagline {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      margin-bottom: 22px;
-    }
-
-    .human {
-      font-size: 0.85rem;
-      color: rgba(234, 234, 234, 0.5);
-    }
-  </style>
+.subline {
+  margin-top: 10px;
+  font-size: 13px;
+  opacity: 0.55;
+}
+</style>
 </head>
 
 <body>
-  <div class="stage">
-
+  <div class="wrapper">
     <div class="fracture"></div>
 
-    <h1>ORDER&nbsp;IN&nbsp;CHAOS</h1>
-
-    <div class="tagline">
-      Controlled chaos. Engineered order.
-    </div>
-
-    <div class="human">
-      Built by someone like you — for someone like you.
-    </div>
-
+    <div class="title">ORDER IN CHAOS</div>
+    <div class="tagline">Controlled chaos. Engineered order.</div>
+    <div class="subline">Built by someone like you — for someone like you.</div>
   </div>
 </body>
 </html>
