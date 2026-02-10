@@ -112,11 +112,33 @@ body::after {
   opacity: 0.55;
 }
 </style>
+  .fracture-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 48px;
+}
+
+.fracture-mark {
+  max-width: 420px;
+  width: 60%;
+  height: auto;
+  filter:
+    drop-shadow(0 0 40px rgba(0, 180, 255, 0.35))
+    drop-shadow(0 0 80px rgba(0, 140, 255, 0.2));
+}
+
 </head>
 
 <body>
   <div class="wrapper">
     <div class="fracture"></div>
+<div class="fracture-wrapper">
+  <img
+    src="assets/Fracture-mark-hero-png.png"
+    alt="Fracture Mark"
+    class="fracture-mark"
+  />
+</div>
 
     <div class="title">ORDER IN CHAOS</div>
     <div class="tagline">Controlled chaos. Engineered order.</div>
