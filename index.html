@@ -1,203 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Order in Chaos</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hourglass — Order in Chaos</title>
 
-<style>
-:root {
-  --bg-top: #04070d;
-  --bg-bottom: #0b1e3a;
-  --glow: #3cc7ff;
-  --text-main: #e9f6ff;
-  --text-soft: #9fc9e6;
-}
+  <style>
+    :root {
+      --bg: #050507;
+      --fg: #e8e8eb;
+      --muted: #9a9aa1;
+      --glow: rgba(180, 200, 255, 0.25);
+    }
 
-* {
-  box-sizing: border-box;
-}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-  background: radial-gradient(ellipse at center, var(--bg-bottom) 0%, var(--bg-top) 70%);
-  color: var(--text-main);
-  overflow-x: hidden;
-}
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   Inter, Helvetica, Arial, sans-serif;
+      scroll-behavior: smooth;
+    }
 
-.hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  position: relative;
-}
+    /* ─────────────────────────────
+       HERO
+    ───────────────────────────── */
 
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at center, rgba(60,199,255,0.15), transparent 60%),
-    linear-gradient(to bottom, transparent, rgba(0,0,0,0.4));
-  pointer-events: none;
-}
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
 
-.wrapper {
-  position: relative;
-  z-index: 2;
-  max-width: 720px;
-  padding: 2rem;
-}
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(
+          1200px 600px at 50% 30%,
+          rgba(120,140,255,0.08),
+          transparent 70%
+        );
+      z-index: 0;
+    }
 
-/* ===== FRACTURE MARK ===== */
-.fracture-wrapper {
-  position: relative;
-  margin-bottom: 3rem;
-}
+    /* Fracture Mark */
 
-.fracture-wrapper::before {
-  content: "";
-  position: absolute;
-  inset: -40%;
-  background: radial-gradient(circle, rgba(60,199,255,0.35), transparent 70%);
-  filter: blur(60px);
-  opacity: 0.6;
-  animation: pulse 6s ease-in-out infinite;
-}
+    .fracture {
+      position: absolute;
+      width: min(55vw, 420px);
+      opacity: 0.85;
+      filter:
+        drop-shadow(0 0 28px var(--glow))
+        drop-shadow(0 0 80px rgba(120,140,255,0.15));
+      animation: drift 22s ease-in-out infinite alternate;
+      z-index: 1;
 
-.fracture-mark {
-  width: 260px;
-  max-width: 70vw;
-  display: block;
-  margin: 0 auto;
-  mix-blend-mode: screen;
-  filter:
-    drop-shadow(0 0 25px rgba(60,199,255,0.6))
-    drop-shadow(0 0 60px rgba(60,199,255,0.35));
-  animation: drift 7s ease-in-out infinite;
-}
+      /* edge blending */
+      -webkit-mask-image: radial-gradient(
+        circle at center,
+        rgba(0,0,0,1) 60%,
+        rgba(0,0,0,0) 100%
+      );
+      mask-image: radial-gradient(
+        circle at center,
+        rgba(0,0,0,1) 60%,
+        rgba(0,0,0,0) 100%
+      );
+    }
 
-/* ===== TEXT ===== */
-.title {
-  font-size: clamp(2rem, 5vw, 3.2rem);
-  letter-spacing: 0.35em;
-  margin-bottom: 1rem;
-  animation: textGlow 6s ease-in-out infinite;
-}
+    @keyframes drift {
+      0%   { transform: translateY(-6px); }
+      100% { transform: translateY(8px); }
+    }
 
-.tagline {
-  font-size: 1.1rem;
-  color: var(--text-soft);
-  margin-bottom: 0.5rem;
-  animation: textDrift 8s ease-in-out infinite;
-}
+    /* Hero Copy */
 
-.subline {
-  font-size: 0.95rem;
-  color: #7faed0;
-  opacity: 0.9;
-}
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 720px;
+      padding: 0 1.5rem;
+      animation: breathe 10s ease-in-out infinite;
+    }
 
-/* ===== SECTION 2 ===== */
-.section {
-  min-height: 100vh;
-  padding: 6rem 2rem;
-  background: linear-gradient(to bottom, var(--bg-top), #02040a);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+    @keyframes breathe {
+      0%,100% { opacity: 0.92; }
+      50%     { opacity: 1; }
+    }
 
-.section-inner {
-  max-width: 700px;
-  text-align: center;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 1.2s ease;
-}
+    .hero h1 {
+      font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.75rem;
+    }
 
-.section-inner.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+    .hero p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--muted);
+    }
 
-/* ===== ANIMATIONS ===== */
-@keyframes pulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.75; }
-}
+    /* Scroll Cue */
 
-@keyframes drift {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
+    .scroll-cue {
+      position: absolute;
+      bottom: 2rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      opacity: 0.6;
+      animation: fadePulse 3s ease-in-out infinite;
+      z-index: 2;
+    }
 
-@keyframes textGlow {
-  0%, 100% {
-    text-shadow: 0 0 12px rgba(60,199,255,0.25);
-  }
-  50% {
-    text-shadow: 0 0 28px rgba(60,199,255,0.6);
-  }
-}
+    @keyframes fadePulse {
+      0%,100% { opacity: 0.25; }
+      50%     { opacity: 0.6; }
+    }
 
-@keyframes textDrift {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
-}
-</style>
+    /* ─────────────────────────────
+       SECTION TWO (REVEAL TARGET)
+    ───────────────────────────── */
+
+    .section {
+      min-height: 100vh;
+      padding: 6rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .section p {
+      max-width: 620px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+  </style>
 </head>
 
 <body>
 
-<section class="hero">
-  <div class="wrapper">
+  <!-- HERO -->
+  <section class="hero">
 
-    <div class="fracture-wrapper">
-      <img
-        src="assets/fracture-mark-hero-png.png"
-        alt="Fracture Mark"
-        class="fracture-mark"
-      />
+    <img
+      src="assets/fracture-mark-hero-png.png"
+      alt="Hourglass Fracture Mark"
+      class="fracture"
+    />
+
+    <div class="hero-content">
+      <h1>Order in Chaos</h1>
+      <p>
+        A decision operating system for moments where mistakes compound.
+      </p>
     </div>
 
-    <div class="title">ORDER IN CHAOS</div>
-    <div class="tagline">Controlled chaos. Engineered order.</div>
-    <div class="subline">Built by someone like you — for someone like you.</div>
+    <div class="scroll-cue">
+      Scroll
+    </div>
 
-  </div>
-</section>
+  </section>
 
-<section class="section">
-  <div class="section-inner" id="reveal">
-    <h2>Structure emerges.</h2>
+  <!-- SECTION TWO -->
+  <section class="section" id="next">
     <p>
-      Chaos is not the enemy.  
-      It is raw signal — waiting for discipline.
+      Hourglass is not motivation.  
+      It is structure under consequence.
     </p>
-  </div>
-</section>
-
-<script>
-const reveal = document.getElementById("reveal");
-
-const observer = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-      }
-    });
-  },
-  { threshold: 0.3 }
-);
-
-observer.observe(reveal);
-</script>
+  </section>
 
 </body>
 </html>
