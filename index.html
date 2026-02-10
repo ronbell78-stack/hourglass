@@ -126,7 +126,6 @@
       font-size: 1.6rem;
       font-weight: 500;
       margin-bottom: 1rem;
-      color: var(--fg-main);
     }
 
     .content p {
@@ -143,21 +142,10 @@
     }
 
     /* ─────────────────────────────
-       ENTER / CTA
+       LINKS / CTAs
     ───────────────────────────── */
 
-    .enter {
-      background: var(--bg-section);
-      border-top: 1px solid var(--rule);
-      border-bottom: 1px solid var(--rule);
-      text-align: center;
-    }
-
-    .enter p {
-      margin-bottom: 2.2rem;
-    }
-
-    .enter a {
+    .cta {
       display: inline-block;
       padding: 0.9rem 2rem;
       border: 1px solid rgba(255,255,255,0.25);
@@ -169,9 +157,14 @@
       transition: all 0.25s ease;
     }
 
-    .enter a:hover {
+    .cta:hover {
       border-color: var(--accent);
       color: var(--accent);
+    }
+
+    .cta.secondary {
+      opacity: 0.8;
+      font-size: 0.7rem;
     }
 
     /* ─────────────────────────────
@@ -240,11 +233,32 @@
     </div>
   </section>
 
-  <!-- ENTER -->
-  <section class="enter">
+  <!-- YOUTUBE -->
+  <section class="lift">
     <div class="content">
-      <h2>Enter Hourglass</h2>
+      <h2>Order in Chaos — YouTube</h2>
       <div class="rule"></div>
+      <p>
+        Long-form discussions, applied doctrine, and real-world analysis.
+        The ideas behind Hourglass, explored in depth.
+      </p>
+
+      <a
+        href="https://www.youtube.com/@theorderinchaosshow"
+        target="_blank"
+        rel="noopener"
+        class="cta secondary"
+      >
+        Visit the Channel
+      </a>
+    </div>
+  </section>
+
+  <!-- ENTER -->
+  <section class="lift">
+    <div class="content" style="text-align:center;">
+      <h2>Enter Hourglass</h2>
+      <div class="rule" style="margin-left:auto;margin-right:auto;"></div>
       <p>
         The Hourglass system begins with structure.
         Complete the worksheet, then use the prompt to analyze your situation
@@ -255,6 +269,7 @@
         href="https://ronbreeze8.gumroad.com/l/qzblq"
         target="_blank"
         rel="noopener"
+        class="cta"
       >
         Access the Hourglass Prompt
       </a>
