@@ -1,206 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Order in Chaos</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order in Chaos</title>
 
-<style>
-:root {
-  --bg-top: #050814;
-  --bg-mid: #081a3a;
-  --glow: rgba(120,200,255,0.55);
-  --glow-soft: rgba(80,160,255,0.35);
-  --text-main: #cfe9ff;
-  --text-sub: #9fbfdc;
-}
+  <style>
+    :root {
+      --blue-core: #4fd1ff;
+      --blue-glow: rgba(79, 209, 255, 0.45);
+      --bg-deep: #05070d;
+    }
 
-* {
-  box-sizing: border-box;
-}
+    * {
+      box-sizing: border-box;
+    }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background: radial-gradient(circle at top, var(--bg-mid), var(--bg-top) 70%);
-  color: var(--text-main);
-  overflow-x: hidden;
-}
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at center, #0b1630 0%, var(--bg-deep) 70%);
+      color: #e6f6ff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      overflow-x: hidden;
+    }
 
-/* ---------- HERO ---------- */
+    /* --- HERO --- */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      text-align: center;
+    }
 
-.hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  text-align: center;
-  padding: 4rem 1rem;
-}
+    /* --- FRACTURE IMAGE --- */
+    .fracture-wrapper {
+      position: relative;
+      margin-bottom: 3rem;
+    }
 
-/* ---------- FRACTURE IMAGE ---------- */
+    .fracture-wrapper::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle, var(--blue-glow) 0%, transparent 60%);
+      filter: blur(60px);
+      z-index: 0;
+      animation: pulse 6s ease-in-out infinite;
+    }
 
-.fracture-wrap {
-  position: relative;
-  width: 280px;
-  height: auto;
-  margin-bottom: 2.5rem;
-  animation: verticalDrift 14s ease-in-out infinite;
-}
+    .fracture {
+      position: relative;
+      width: 260px;
+      max-width: 60vw;
+      animation: drift 8s ease-in-out infinite;
+      z-index: 1;
+      filter: drop-shadow(0 0 30px var(--blue-glow));
+    }
 
-.fracture-wrap::after {
-  content: "";
-  position: absolute;
-  inset: -40%;
-  background: radial-gradient(circle, var(--glow-soft), transparent 70%);
-  filter: blur(60px);
-  z-index: -1;
-  animation: pulse 6s ease-in-out infinite;
-}
+    /* --- TEXT --- */
+    h1 {
+      letter-spacing: 0.35em;
+      font-weight: 500;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      margin: 0 0 1rem 0;
+      animation: textGlow 6s ease-in-out infinite;
+    }
 
-.fracture-mark {
-  width: 100%;
-  display: block;
+    .tagline {
+      opacity: 0.85;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
 
-  mix-blend-mode: screen;
+    .subtag {
+      opacity: 0.6;
+      font-size: 0.95rem;
+    }
 
-  -webkit-mask-image: radial-gradient(
-    ellipse at center,
-    rgba(0,0,0,1) 40%,
-    rgba(0,0,0,0.85) 55%,
-    rgba(0,0,0,0.45) 68%,
-    rgba(0,0,0,0) 82%
-  );
-  mask-image: radial-gradient(
-    ellipse at center,
-    rgba(0,0,0,1) 40%,
-    rgba(0,0,0,0.85) 55%,
-    rgba(0,0,0,0.45) 68%,
-    rgba(0,0,0,0) 82%
-  );
+    /* --- SECOND SECTION --- */
+    .section {
+      min-height: 100vh;
+      padding: 20vh 10vw;
+      background: linear-gradient(to bottom, transparent, #02040a);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 1.2s ease, transform 1.2s ease;
+    }
 
-  filter:
-    brightness(1.05)
-    contrast(1.1)
-    drop-shadow(0 0 30px var(--glow))
-    drop-shadow(0 0 80px var(--glow-soft));
-}
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-/* ---------- TEXT ---------- */
+    /* --- ANIMATIONS --- */
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
 
-.title {
-  font-size: clamp(2rem, 5vw, 3.4rem);
-  letter-spacing: 0.28em;
-  margin: 0;
-  text-transform: uppercase;
-  animation: textPulse 6s ease-in-out infinite;
-}
+    @keyframes drift {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
 
-.subtitle {
-  margin-top: 1rem;
-  font-size: 1.1rem;
-  color: var(--text-sub);
-  opacity: 0.85;
-}
-
-.byline {
-  margin-top: 0.5rem;
-  font-size: 0.95rem;
-  color: #7fa6c7;
-  opacity: 0.75;
-}
-
-/* ---------- SCROLL REVEAL ---------- */
-
-.section {
-  min-height: 100vh;
-  padding: 6rem 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.section-content {
-  max-width: 640px;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 1.2s ease, transform 1.2s ease;
-}
-
-.section-content.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ---------- ANIMATIONS ---------- */
-
-@keyframes pulse {
-  0%, 100% { opacity: 0.35; }
-  50% { opacity: 0.7; }
-}
-
-@keyframes verticalDrift {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
-}
-
-@keyframes textPulse {
-  0%, 100% {
-    text-shadow: 0 0 12px rgba(120,200,255,0.25);
-  }
-  50% {
-    text-shadow: 0 0 24px rgba(120,200,255,0.55);
-  }
-}
-</style>
+    @keyframes textGlow {
+      0%, 100% { text-shadow: 0 0 10px rgba(79,209,255,0.25); }
+      50% { text-shadow: 0 0 25px rgba(79,209,255,0.6); }
+    }
+  </style>
 </head>
 
 <body>
 
-<section class="hero">
-  <div class="fracture-wrap">
-    <img
-      src="assets/fracture-mark-hero-png.png"
-      alt="Fracture Mark"
-      class="fracture-mark"
-    />
-  </div>
+  <section class="hero">
+    <div class="fracture-wrapper">
+      <img
+        src="./assets/Fracture-mark-hero-png.png"
+        alt="Fracture Mark"
+        class="fracture"
+      />
+    </div>
 
-  <h1 class="title">Order in Chaos</h1>
-  <div class="subtitle">Controlled chaos. Engineered order.</div>
-  <div class="byline">Built by someone like you — for someone like you.</div>
-</section>
+    <h1>ORDER IN CHAOS</h1>
+    <div class="tagline">Controlled chaos. Engineered order.</div>
+    <div class="subtag">Built by someone like you — for someone like you.</div>
+  </section>
 
-<section class="section">
-  <div class="section-content" id="reveal">
-    <h2>Systems emerge under pressure.</h2>
+  <section class="section" id="next">
+    <h2>Operation Hourglass</h2>
     <p>
-      Order in Chaos is not decoration.  
-      It is structure revealed through stress.
+      This system exists to impose structure where pressure breaks form.
+      It is not guidance. It is alignment.
     </p>
-  </div>
-</section>
+  </section>
 
-<script>
-const reveal = document.getElementById("reveal");
+  <script>
+    const section = document.querySelector('.section');
 
-const observer = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-      }
-    });
-  },
-  { threshold: 0.25 }
-);
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.25 });
 
-observer.observe(reveal);
-</script>
+    observer.observe(section);
+  </script>
 
 </body>
 </html>
