@@ -6,120 +6,119 @@
   <title>Order in Chaos</title>
 
   <style>
+    :root {
+      --bg-deep: #05070c;
+      --bg-mid: #0b1220;
+      --glow-core: #4cc9ff;
+      --glow-soft: rgba(76, 201, 255, 0.25);
+      --text-main: #eaeaea;
+      --text-muted: rgba(234, 234, 234, 0.65);
+    }
+
     * {
       box-sizing: border-box;
+    }
+
+    html, body {
       margin: 0;
       padding: 0;
+      height: 100%;
+      background: radial-gradient(circle at top, var(--bg-mid), var(--bg-deep) 70%);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text-main);
     }
 
     body {
-      height: 100vh;
-      width: 100vw;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: radial-gradient(circle at top, #0b1220 0%, #05070d 70%);
-      color: #e6ebf2;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-                   Roboto, Helvetica, Arial, sans-serif;
       overflow: hidden;
-      text-align: center;
     }
 
-    .container {
+    .stage {
+      text-align: center;
       max-width: 720px;
-      padding: 40px;
+      padding: 40px 20px;
+    }
+
+    /* FRACTURE MARK */
+    .fracture {
+      position: relative;
+      width: 48px;
+      height: 180px;
+      margin: 0 auto 36px;
+    }
+
+    .fracture::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        var(--glow-core) 50%,
+        transparent 100%
+      );
+      clip-path: polygon(
+        45% 0%,
+        55% 0%,
+        52% 40%,
+        70% 50%,
+        52% 60%,
+        55% 100%,
+        45% 100%,
+        48% 60%,
+        30% 50%,
+        48% 40%
+      );
+      filter: drop-shadow(0 0 12px var(--glow-core));
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 0.65;
+        filter: drop-shadow(0 0 10px var(--glow-soft));
+      }
+      50% {
+        opacity: 1;
+        filter: drop-shadow(0 0 22px var(--glow-core));
+      }
     }
 
     h1 {
-      font-size: 0.85rem;
       letter-spacing: 0.32em;
-      font-weight: 600;
-      color: #9fb6cc;
-      margin: 36px 0 18px;
+      font-weight: 500;
+      font-size: 1.4rem;
+      margin: 0 0 14px;
     }
 
     .tagline {
-      font-size: 1.05rem;
-      opacity: 0.85;
-      margin-bottom: 18px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 22px;
     }
 
-    .signature {
+    .human {
       font-size: 0.85rem;
-      opacity: 0.6;
-    }
-
-    svg {
-      filter:
-        drop-shadow(0 40px 80px rgba(0,0,0,0.6))
-        drop-shadow(0 0 120px rgba(58,166,255,0.08));
+      color: rgba(234, 234, 234, 0.5);
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
+  <div class="stage">
 
-    <!-- FRACTURE MARK — FINAL, CODED SVG -->
-    <svg
-      width="90"
-      height="240"
-      viewBox="0 0 90 240"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-label="Order in Chaos — Fracture Mark"
-    >
-      <defs>
-        <!-- Stone gradient -->
-        <linearGradient id="stoneGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#202a36"/>
-          <stop offset="100%" stop-color="#121922"/>
-        </linearGradient>
+    <div class="fracture"></div>
 
-        <!-- Contained energy glow -->
-        <linearGradient id="fractureGlow" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="rgba(120,190,255,0)"/>
-          <stop offset="50%" stop-color="rgba(120,190,255,0.9)"/>
-          <stop offset="100%" stop-color="rgba(120,190,255,0)"/>
-        </linearGradient>
-
-        <filter id="innerGlow">
-          <feGaussianBlur stdDeviation="2" result="blur"/>
-          <feMerge>
-            <feMergeNode in="blur"/>
-            <feMergeNode in="SourceGraphic"/>
-          </feMerge>
-        </filter>
-      </defs>
-
-      <!-- Stone monolith -->
-      <rect
-        x="12"
-        y="0"
-        width="66"
-        height="240"
-        rx="6"
-        fill="url(#stoneGrad)"
-      />
-
-      <!-- Fracture seam -->
-      <path
-        d="M45 10 L42 80 L48 140 L44 220"
-        stroke="url(#fractureGlow)"
-        stroke-width="2"
-        fill="none"
-        filter="url(#innerGlow)"
-      />
-    </svg>
-
-    <h1>ORDER IN CHAOS</h1>
+    <h1>ORDER&nbsp;IN&nbsp;CHAOS</h1>
 
     <div class="tagline">
       Controlled chaos. Engineered order.
     </div>
 
-    <div class="signature">
-      Built by someone who understands order — for those who live in chaos.
+    <div class="human">
+      Built by someone like you — for someone like you.
     </div>
 
   </div>
