@@ -6,77 +6,112 @@
   <title>Order in Chaos</title>
 
   <style>
+    :root {
+      --bg-deep: #05070d;
+      --blue-core: #4fc3ff;
+      --blue-glow: rgba(79,195,255,0.6);
+      --text-main: #e6f2ff;
+      --text-subtle: #9fb7cc;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     html, body {
       margin: 0;
       padding: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle at top, #0a1220 0%, #05070d 70%);
-      color: #dfe7f2;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-                   Roboto, Helvetica, Arial, sans-serif;
+      background: radial-gradient(circle at top, #0b1d3a 0%, var(--bg-deep) 60%);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text-main);
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       overflow: hidden;
     }
 
     .container {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
       text-align: center;
+      animation: fadeIn 2.5s ease forwards;
+      max-width: 680px;
+      padding: 2rem;
     }
 
     .fracture-wrapper {
       position: relative;
-      width: 160px;
-      height: 420px;
-      margin-bottom: 40px;
+      display: inline-block;
+      margin-bottom: 3rem;
+      animation: breathe 10s ease-in-out infinite;
     }
 
     .fracture-wrapper::before {
       content: "";
       position: absolute;
       inset: -40px;
-      background: radial-gradient(
-        circle,
-        rgba(0, 170, 255, 0.35),
-        rgba(0, 170, 255, 0.08),
-        transparent 70%
-      );
+      background: radial-gradient(circle, var(--blue-glow), transparent 70%);
       filter: blur(40px);
-      z-index: 0;
+      opacity: 0.7;
+      animation: pulse 10s ease-in-out infinite;
+      z-index: -1;
     }
 
-    .fracture-mark {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      background: url("assets/Fracture-mark-hero-png.png") no-repeat center;
-      background-size: contain;
-      z-index: 1;
-      filter:
-        drop-shadow(0 0 14px rgba(0, 170, 255, 0.6))
-        drop-shadow(0 0 40px rgba(0, 170, 255, 0.25));
+    .fracture {
+      width: 220px;
+      height: auto;
+      display: block;
     }
 
     h1 {
       margin: 0;
-      font-size: 1.6rem;
-      letter-spacing: 0.45em;
+      font-size: 2.1rem;
+      letter-spacing: 0.35em;
+      font-weight: 500;
       text-transform: uppercase;
     }
 
     .tagline {
-      margin-top: 14px;
-      font-size: 1rem;
-      color: #9fb7d6;
+      margin-top: 1.2rem;
+      font-size: 1.05rem;
+      color: var(--text-subtle);
     }
 
     .subline {
-      margin-top: 8px;
-      font-size: 0.9rem;
-      color: #6f86a3;
+      margin-top: 0.6rem;
+      font-size: 0.95rem;
+      color: rgba(159,183,204,0.7);
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.5; }
+      50% { opacity: 0.9; }
+      100% { opacity: 0.5; }
+    }
+
+    @keyframes breathe {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.015); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @media (max-width: 600px) {
+      .fracture {
+        width: 170px;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+        letter-spacing: 0.28em;
+      }
     }
   </style>
 </head>
@@ -84,12 +119,22 @@
 <body>
   <div class="container">
     <div class="fracture-wrapper">
-      <div class="fracture-mark"></div>
+      <img
+        src="assets/fracture-mark-hero.png"
+        alt="Fracture Mark"
+        class="fracture"
+      />
     </div>
 
-    <h1>Order in Chaos</h1>
-    <div class="tagline">Controlled chaos. Engineered order.</div>
-    <div class="subline">Built by someone like you — for someone like you.</div>
+    <h1>ORDER IN CHAOS</h1>
+
+    <div class="tagline">
+      Controlled chaos. Engineered order.
+    </div>
+
+    <div class="subline">
+      Built by someone like you — for someone like you.
+    </div>
   </div>
 </body>
 </html>
