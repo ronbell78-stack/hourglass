@@ -123,6 +123,7 @@
     .content {
       max-width: 680px;
       line-height: 1.75;
+      text-align: center;
     }
 
     .content h2 {
@@ -141,7 +142,27 @@
       height: 1px;
       background: var(--accent);
       opacity: 0.6;
-      margin: 2rem 0;
+      margin: 2rem auto;
+    }
+
+    /* ─────────────────────────────
+       IDENTIFIER MARKS
+    ───────────────────────────── */
+
+    .product-mark {
+      display: block;
+      width: 64px;
+      height: auto;
+      margin: 0 auto 1.25rem auto;
+      opacity: 0.9;
+    }
+
+    .media-mark {
+      display: block;
+      width: 56px;
+      height: auto;
+      margin: 0 auto 1.25rem auto;
+      opacity: 0.85;
     }
 
     /* ─────────────────────────────
@@ -199,7 +220,7 @@
       <h1>ORDER IN CHAOS</h1>
       <p>
         A doctrine-driven company building tools for
-        high-stakes decision-making.
+        high-stakes decision-making for individuals and organizations.
       </p>
     </div>
 
@@ -217,22 +238,23 @@
         for environments where pressure, power, and incentives
         distort judgment.
       </p>
-      <p>
-        The company exists to impose structure where
-        emotion, noise, and competing narratives create risk.
-      </p>
     </div>
   </section>
 
   <!-- PRODUCT -->
   <section>
     <div class="content">
+
+      <img
+        src="assets/hourglass-mark.png"
+        alt="Hourglass product mark"
+        class="product-mark"
+      />
+
       <h2>The Product — Hourglass</h2>
       <div class="rule"></div>
       <p>
         Hourglass is a product developed by Order in Chaos.
-      </p>
-      <p>
         It is a decision operating system designed for moments
         where mistakes compound and structure is required
         before action.
@@ -240,9 +262,16 @@
     </div>
   </section>
 
-  <!-- YOUTUBE -->
+  <!-- MEDIA -->
   <section class="lift">
     <div class="content">
+
+      <img
+        src="assets/media-play-icon.svg"
+        alt="Media channel icon"
+        class="media-mark"
+      />
+
       <h2>Order in Chaos — YouTube</h2>
       <div class="rule"></div>
       <p>
@@ -263,11 +292,10 @@
 
   <!-- ENTER PRODUCT -->
   <section class="lift">
-    <div class="content" style="text-align:center;">
+    <div class="content">
       <h2>Enter Hourglass</h2>
-      <div class="rule" style="margin-left:auto;margin-right:auto;"></div>
+      <div class="rule"></div>
       <p>
-        Hourglass begins with structure.
         Complete the worksheet, then use the prompt
         to analyze your situation without distortion.
       </p>
