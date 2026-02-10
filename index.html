@@ -1,112 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Order in Chaos</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Order in Chaos</title>
 
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: radial-gradient(circle at center, #0a1a3a 0%, #020814 70%);
-      color: #eaf2ff;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      overflow-x: hidden;
-    }
+<style>
+:root {
+  --bg-top: #05070d;
+  --bg-bottom: #0a1b3d;
+  --glow: #4fd1ff;
+  --text-main: #e6f2ff;
+  --text-soft: #9fb8d6;
+}
 
-    .wrapper {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      text-align: center;
-    }
+* {
+  box-sizing: border-box;
+}
 
-    /* Fracture image */
-    .fracture-wrapper {
-      position: relative;
-      width: 320px;
-      margin-bottom: 40px;
-    }
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: radial-gradient(circle at center, var(--bg-bottom), var(--bg-top));
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text-main);
+  overflow-x: hidden;
+}
 
-    .fracture-mark {
-      width: 100%;
-      display: block;
-      filter:
-        drop-shadow(0 0 25px rgba(90,160,255,0.45))
-        drop-shadow(0 0 60px rgba(60,120,255,0.25));
-      animation: pulse 6s ease-in-out infinite;
-      mask-image: radial-gradient(circle at center, black 65%, transparent 100%);
-      -webkit-mask-image: radial-gradient(circle at center, black 65%, transparent 100%);
-    }
+/* ===== HERO ===== */
 
-    @keyframes pulse {
-      0%, 100% {
-        transform: translateY(0);
-        filter:
-          drop-shadow(0 0 25px rgba(90,160,255,0.45))
-          drop-shadow(0 0 60px rgba(60,120,255,0.25));
-      }
-      50% {
-        transform: translateY(-6px);
-        filter:
-          drop-shadow(0 0 40px rgba(120,190,255,0.65))
-          drop-shadow(0 0 90px rgba(90,160,255,0.45));
-      }
-    }
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-align: center;
+}
 
-    .title {
-      font-size: 36px;
-      letter-spacing: 0.3em;
-      margin-top: 10px;
-    }
+.energy-field {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at center, rgba(79,209,255,0.08), transparent 60%),
+    radial-gradient(circle at center, rgba(79,209,255,0.04), transparent 75%);
+  animation: pulse 6s ease-in-out infinite;
+  pointer-events: none;
+}
 
-    .tagline {
-      margin-top: 14px;
-      font-size: 16px;
-      opacity: 0.85;
-    }
+@keyframes pulse {
+  0%,100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
 
-    .subline {
-      margin-top: 6px;
-      font-size: 14px;
-      opacity: 0.6;
-    }
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
 
-    /* Second section */
-    .section {
-      min-height: 100vh;
-      padding: 120px 20px;
-      background: linear-gradient(to bottom, #020814, #050b1c);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 1.2s ease, transform 1.2s ease;
-    }
+/* ===== FRACTURE MARK ===== */
 
-    .section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+.fracture-wrapper {
+  position: relative;
+  width: 280px;
+  max-width: 70vw;
+}
 
-    .section h2 {
-      font-size: 28px;
-      letter-spacing: 0.15em;
-    }
-  </style>
+.fracture-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle, rgba(79,209,255,0.35), transparent 65%);
+  filter: blur(40px);
+  opacity: 0.8;
+  animation: glowPulse 5s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%,100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.fracture-mark {
+  width: 100%;
+  display: block;
+  filter:
+    drop-shadow(0 0 18px rgba(79,209,255,0.6))
+    drop-shadow(0 0 42px rgba(79,209,255,0.35));
+  animation: drift 7s ease-in-out infinite;
+  mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
+  -webkit-mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
+}
+
+@keyframes drift {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ===== TEXT ===== */
+
+.title {
+  font-size: clamp(32px, 5vw, 48px);
+  letter-spacing: 0.35em;
+  text-indent: 0.35em;
+  animation: textPulse 6s ease-in-out infinite;
+}
+
+.tagline {
+  font-size: 18px;
+  color: var(--text-soft);
+}
+
+.subline {
+  font-size: 14px;
+  color: rgba(159,184,214,0.75);
+}
+
+@keyframes textPulse {
+  0%,100% { text-shadow: 0 0 6px rgba(79,209,255,0.15); }
+  50% { text-shadow: 0 0 14px rgba(79,209,255,0.45); }
+}
+
+/* ===== SCROLL SECTION ===== */
+
+.section {
+  min-height: 100vh;
+  padding: 120px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-inner {
+  max-width: 700px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.section-inner.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.section p {
+  font-size: 18px;
+  color: var(--text-soft);
+  line-height: 1.6;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="wrapper">
+<section class="hero">
+  <div class="energy-field"></div>
+
+  <div class="hero-content">
     <div class="fracture-wrapper">
       <img
-        src="assets/Fracture-mark-hero-png.png"
+        src="assets/fracture-mark-hero-png.png"
         alt="Fracture Mark"
         class="fracture-mark"
       />
@@ -116,20 +180,29 @@
     <div class="tagline">Controlled chaos. Engineered order.</div>
     <div class="subline">Built by someone like you — for someone like you.</div>
   </div>
+</section>
 
-  <div class="section" id="next">
-    <h2>THE SYSTEM EMERGES</h2>
+<section class="section">
+  <div class="section-inner" id="reveal">
+    <h2>Structure Emerges</h2>
+    <p>
+      When pressure becomes precision, chaos collapses into form.
+      This is where systems stop reacting and start deciding.
+    </p>
   </div>
+</section>
 
-  <script>
-    const section = document.getElementById("next");
-    window.addEventListener("scroll", () => {
-      const rect = section.getBoundingClientRect();
-      if (rect.top < window.innerHeight * 0.75) {
-        section.classList.add("visible");
-      }
-    });
-  </script>
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+    }
+  });
+});
+
+observer.observe(document.getElementById("reveal"));
+</script>
 
 </body>
 </html>
