@@ -7,121 +7,125 @@
 
 <style>
 :root {
-  --bg-deep: #030712;
-  --bg-mid: #071a3a;
-  --energy-core: #8fdcff;
-  --energy-glow: rgba(120, 200, 255, 0.6);
-  --text-main: #d8efff;
+  --bg-top: #050814;
+  --bg-mid: #081a3a;
+  --glow: rgba(120,200,255,0.55);
+  --glow-soft: rgba(80,160,255,0.35);
+  --text-main: #cfe9ff;
+  --text-sub: #9fbfdc;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%;
-  background:
-    radial-gradient(circle at center, var(--bg-mid) 0%, var(--bg-deep) 75%);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: radial-gradient(circle at top, var(--bg-mid), var(--bg-top) 70%);
   color: var(--text-main);
   overflow-x: hidden;
 }
 
-body {
-  scroll-behavior: smooth;
-}
+/* ---------- HERO ---------- */
 
-/* ---- HERO SECTION ---- */
 .hero {
   min-height: 100vh;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  position: relative;
   text-align: center;
-  position: relative;
+  padding: 4rem 1rem;
 }
 
-.container {
-  position: relative;
-}
+/* ---------- FRACTURE IMAGE ---------- */
 
-/* ---- FRACTURE ---- */
-.fracture-wrapper {
+.fracture-wrap {
   position: relative;
   width: 280px;
-  max-width: 80vw;
-  margin: 0 auto 48px;
-  animation: drift 10s ease-in-out infinite;
+  height: auto;
+  margin-bottom: 2.5rem;
+  animation: verticalDrift 14s ease-in-out infinite;
 }
 
-.fracture-wrapper::before {
+.fracture-wrap::after {
   content: "";
   position: absolute;
-  inset: -50%;
-  background:
-    radial-gradient(circle at center,
-      rgba(120, 200, 255, 0.25),
-      transparent 70%);
-  filter: blur(50px);
-  z-index: 0;
+  inset: -40%;
+  background: radial-gradient(circle, var(--glow-soft), transparent 70%);
+  filter: blur(60px);
+  z-index: -1;
   animation: pulse 6s ease-in-out infinite;
 }
 
 .fracture-mark {
   width: 100%;
-  position: relative;
-  z-index: 1;
+  display: block;
 
-  -webkit-mask-image: radial-gradient(circle at center, black 55%, transparent 80%);
-  mask-image: radial-gradient(circle at center, black 55%, transparent 80%);
+  mix-blend-mode: screen;
+
+  -webkit-mask-image: radial-gradient(
+    ellipse at center,
+    rgba(0,0,0,1) 40%,
+    rgba(0,0,0,0.85) 55%,
+    rgba(0,0,0,0.45) 68%,
+    rgba(0,0,0,0) 82%
+  );
+  mask-image: radial-gradient(
+    ellipse at center,
+    rgba(0,0,0,1) 40%,
+    rgba(0,0,0,0.85) 55%,
+    rgba(0,0,0,0.45) 68%,
+    rgba(0,0,0,0) 82%
+  );
 
   filter:
-    drop-shadow(0 0 25px var(--energy-glow))
-    drop-shadow(0 0 60px rgba(0,140,255,0.35));
+    brightness(1.05)
+    contrast(1.1)
+    drop-shadow(0 0 30px var(--glow))
+    drop-shadow(0 0 80px var(--glow-soft));
 }
 
-/* ---- TEXT ---- */
-h1 {
-  font-size: 2.4rem;
-  letter-spacing: 0.35em;
-  font-weight: 300;
-  margin: 0 0 18px;
+/* ---------- TEXT ---------- */
+
+.title {
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  letter-spacing: 0.28em;
+  margin: 0;
+  text-transform: uppercase;
   animation: textPulse 6s ease-in-out infinite;
 }
 
-.tagline {
-  font-size: 1rem;
+.subtitle {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  color: var(--text-sub);
   opacity: 0.85;
-  margin-bottom: 10px;
 }
 
-.subtle {
-  font-size: 0.9rem;
-  opacity: 0.6;
+.byline {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  color: #7fa6c7;
+  opacity: 0.75;
 }
 
-/* ---- SCROLL CUE ---- */
-.scroll-cue {
-  position: absolute;
-  bottom: 28px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 0.8rem;
-  opacity: 0.45;
-}
+/* ---------- SCROLL REVEAL ---------- */
 
-/* ---- SECOND SECTION ---- */
 .section {
   min-height: 100vh;
-  padding: 120px 20px;
+  padding: 6rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  background:
-    radial-gradient(circle at top, #06142c, #02040a);
+  text-align: center;
 }
 
 .section-content {
   max-width: 640px;
-  text-align: center;
   opacity: 0;
   transform: translateY(40px);
   transition: opacity 1.2s ease, transform 1.2s ease;
@@ -132,49 +136,25 @@ h1 {
   transform: translateY(0);
 }
 
-.section h2 {
-  letter-spacing: 0.25em;
-  font-weight: 300;
-  margin-bottom: 24px;
-}
+/* ---------- ANIMATIONS ---------- */
 
-.section p {
-  line-height: 1.7;
-  opacity: 0.85;
-}
-
-/* ---- ANIMATIONS ---- */
 @keyframes pulse {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 1; }
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 0.7; }
 }
 
-@keyframes drift {
+@keyframes verticalDrift {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+  50% { transform: translateY(-12px); }
 }
 
 @keyframes textPulse {
-  0%, 100% { text-shadow: 0 0 0 rgba(0,0,0,0); }
-  50% { text-shadow: 0 0 18px rgba(120,200,255,0.35); }
-}
-
-/* ---- GRAIN ---- */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    repeating-radial-gradient(
-      circle at center,
-      rgba(255,255,255,0.015) 0px,
-      rgba(255,255,255,0.015) 1px,
-      transparent 2px,
-      transparent 4px
-    );
-  opacity: 0.35;
-  mix-blend-mode: overlay;
+  0%, 100% {
+    text-shadow: 0 0 12px rgba(120,200,255,0.25);
+  }
+  50% {
+    text-shadow: 0 0 24px rgba(120,200,255,0.55);
+  }
 }
 </style>
 </head>
@@ -182,36 +162,25 @@ body::after {
 <body>
 
 <section class="hero">
-  <div class="container">
-    <div class="fracture-wrapper">
-      <img src="assets/Fracture-mark-hero-png.png"
-           alt="Fracture Mark"
-           class="fracture-mark">
-    </div>
-
-    <h1>ORDER IN CHAOS</h1>
-
-    <div class="tagline">
-      Controlled chaos. Engineered order.
-    </div>
-
-    <div class="subtle">
-      Built by someone like you — for someone like you.
-    </div>
+  <div class="fracture-wrap">
+    <img
+      src="assets/fracture-mark-hero-png.png"
+      alt="Fracture Mark"
+      class="fracture-mark"
+    />
   </div>
 
-  <div class="scroll-cue">↓ enter</div>
+  <h1 class="title">Order in Chaos</h1>
+  <div class="subtitle">Controlled chaos. Engineered order.</div>
+  <div class="byline">Built by someone like you — for someone like you.</div>
 </section>
 
 <section class="section">
   <div class="section-content" id="reveal">
-    <h2>THE DOCTRINE</h2>
+    <h2>Systems emerge under pressure.</h2>
     <p>
-      Order does not eliminate chaos.  
-      It survives inside it.
-      <br><br>
-      This system was not designed for obedience.
-      It was built for clarity under pressure.
+      Order in Chaos is not decoration.  
+      It is structure revealed through stress.
     </p>
   </div>
 </section>
@@ -220,12 +189,14 @@ body::after {
 const reveal = document.getElementById("reveal");
 
 const observer = new IntersectionObserver(
-  ([entry]) => {
-    if (entry.isIntersecting) {
-      reveal.classList.add("visible");
-    }
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
   },
-  { threshold: 0.4 }
+  { threshold: 0.25 }
 );
 
 observer.observe(reveal);
