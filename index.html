@@ -2,175 +2,159 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Order in Chaos</title>
 
 <style>
-/* =====================
-   GLOBAL RESET
-===================== */
+:root {
+  --bg-top: #04070d;
+  --bg-bottom: #0b1e3a;
+  --glow: #3cc7ff;
+  --text-main: #e9f6ff;
+  --text-soft: #9fc9e6;
+}
+
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 html, body {
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(120% 120% at 50% 70%, #0b1f3a 0%, #050b17 55%, #03060d 100%);
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  background: radial-gradient(ellipse at center, var(--bg-bottom) 0%, var(--bg-top) 70%);
+  color: var(--text-main);
   overflow-x: hidden;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
-  color: #cfe8ff;
 }
 
-/* =====================
-   WRAPPER
-===================== */
-.wrapper {
+.hero {
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 28px;
+  text-align: center;
   position: relative;
-  isolation: isolate;
 }
 
-/* =====================
-   FRACTURE CONTAINER
-===================== */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at center, rgba(60,199,255,0.15), transparent 60%),
+    linear-gradient(to bottom, transparent, rgba(0,0,0,0.4));
+  pointer-events: none;
+}
+
+.wrapper {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+  padding: 2rem;
+}
+
+/* ===== FRACTURE MARK ===== */
 .fracture-wrapper {
   position: relative;
-  width: 280px;          /* ⬅ slightly smaller object */
-  max-width: 70vw;
-  aspect-ratio: 9 / 16;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
+  margin-bottom: 3rem;
 }
 
-/* =====================
-   IMAGE ITSELF
-===================== */
-.fracture-mark {
-  width: 100%;
-  height: auto;
-  display: block;
-
-  /* Kill hard edges */
-  mask-image: radial-gradient(
-    ellipse at center,
-    rgba(0,0,0,1) 55%,
-    rgba(0,0,0,0.85) 65%,
-    rgba(0,0,0,0.4) 78%,
-    rgba(0,0,0,0) 92%
-  );
-  -webkit-mask-image: radial-gradient(
-    ellipse at center,
-    rgba(0,0,0,1) 55%,
-    rgba(0,0,0,0.85) 65%,
-    rgba(0,0,0,0.4) 78%,
-    rgba(0,0,0,0) 92%
-  );
-
-  animation: drift 9s ease-in-out infinite;
-  position: relative;
-  z-index: 3;
-}
-
-/* =====================
-   AMBIENT ENERGY GLOW
-===================== */
-.fracture-wrapper::before,
-.fracture-wrapper::after {
+.fracture-wrapper::before {
   content: "";
   position: absolute;
   inset: -40%;
-  pointer-events: none;
-  z-index: 1;
+  background: radial-gradient(circle, rgba(60,199,255,0.35), transparent 70%);
+  filter: blur(60px);
+  opacity: 0.6;
+  animation: pulse 6s ease-in-out infinite;
 }
 
-/* Core energy pulse */
-.fracture-wrapper::before {
-  background:
-    radial-gradient(circle at center,
-      rgba(80,160,255,0.35) 0%,
-      rgba(80,160,255,0.18) 22%,
-      rgba(80,160,255,0.06) 45%,
-      rgba(80,160,255,0) 70%
-    );
-  filter: blur(22px);
-  animation: pulse 6.5s ease-in-out infinite;
+.fracture-mark {
+  width: 260px;
+  max-width: 70vw;
+  display: block;
+  margin: 0 auto;
+  mix-blend-mode: screen;
+  filter:
+    drop-shadow(0 0 25px rgba(60,199,255,0.6))
+    drop-shadow(0 0 60px rgba(60,199,255,0.35));
+  animation: drift 7s ease-in-out infinite;
 }
 
-/* Environmental wash (page-level blend) */
-.fracture-wrapper::after {
-  background:
-    radial-gradient(circle at center,
-      rgba(40,120,255,0.12) 0%,
-      rgba(40,120,255,0.06) 30%,
-      rgba(40,120,255,0) 65%
-    );
-  filter: blur(55px);
-  animation: ambient 11s ease-in-out infinite;
-}
-
-/* =====================
-   TEXT
-===================== */
+/* ===== TEXT ===== */
 .title {
-  font-size: clamp(26px, 4vw, 40px);
+  font-size: clamp(2rem, 5vw, 3.2rem);
   letter-spacing: 0.35em;
-  text-align: center;
-  color: #d8ecff;
-  animation: textGlow 7s ease-in-out infinite;
+  margin-bottom: 1rem;
+  animation: textGlow 6s ease-in-out infinite;
 }
 
 .tagline {
-  font-size: 15px;
-  opacity: 0.85;
-  text-align: center;
+  font-size: 1.1rem;
+  color: var(--text-soft);
+  margin-bottom: 0.5rem;
+  animation: textDrift 8s ease-in-out infinite;
 }
 
 .subline {
-  font-size: 13px;
-  opacity: 0.6;
+  font-size: 0.95rem;
+  color: #7faed0;
+  opacity: 0.9;
+}
+
+/* ===== SECTION 2 ===== */
+.section {
+  min-height: 100vh;
+  padding: 6rem 2rem;
+  background: linear-gradient(to bottom, var(--bg-top), #02040a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-inner {
+  max-width: 700px;
   text-align: center;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1.2s ease;
 }
 
-/* =====================
-   ANIMATIONS
-===================== */
+.section-inner.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== ANIMATIONS ===== */
 @keyframes pulse {
-  0%, 100% { opacity: 0.55; transform: scale(0.95); }
-  50% { opacity: 0.85; transform: scale(1.05); }
-}
-
-@keyframes ambient {
-  0%, 100% { opacity: 0.35; }
-  50% { opacity: 0.65; }
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.75; }
 }
 
 @keyframes drift {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-6px); }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
 @keyframes textGlow {
   0%, 100% {
-    text-shadow: 0 0 10px rgba(80,160,255,0.15);
+    text-shadow: 0 0 12px rgba(60,199,255,0.25);
   }
   50% {
-    text-shadow: 0 0 22px rgba(80,160,255,0.35);
+    text-shadow: 0 0 28px rgba(60,199,255,0.6);
   }
+}
+
+@keyframes textDrift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
 }
 </style>
 </head>
 
 <body>
+
+<section class="hero">
   <div class="wrapper">
 
     <div class="fracture-wrapper">
@@ -186,5 +170,34 @@ html, body {
     <div class="subline">Built by someone like you — for someone like you.</div>
 
   </div>
+</section>
+
+<section class="section">
+  <div class="section-inner" id="reveal">
+    <h2>Structure emerges.</h2>
+    <p>
+      Chaos is not the enemy.  
+      It is raw signal — waiting for discipline.
+    </p>
+  </div>
+</section>
+
+<script>
+const reveal = document.getElementById("reveal");
+
+const observer = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  },
+  { threshold: 0.3 }
+);
+
+observer.observe(reveal);
+</script>
+
 </body>
 </html>
