@@ -43,26 +43,28 @@
     }
 
     /* Bookend company marks */
-    .company-bookend {
+    /* Bookend company marks */
+.company-bookend {
   position: absolute;
   top: 50%;
-  width: 180px;                /* ENLARGED */
+  width: 220px;
   height: auto;
-  opacity: 0.38;               /* MORE PRESENT, STILL SUBORDINATE */
-  z-index: 1;
+  opacity: 0.55;
+  z-index: 2;
   pointer-events: none;
   transform: translateY(-50%);
-  filter:
-    drop-shadow(0 0 18px rgba(120,160,255,0.18))
-    drop-shadow(0 0 48px rgba(120,160,255,0.12));
+  mix-blend-mode: screen;
+  filter: brightness(1.15) contrast(1.15)
+          drop-shadow(0 0 28px rgba(120,160,255,0.35))
+          drop-shadow(0 0 80px rgba(120,160,255,0.18));
 }
 
     .company-bookend.left {
-      left: 6%;
+      left: 4%;
     }
 
     .company-bookend.right {
-      right: 6%;
+      right: 4%;
     }
 
     .fracture {
