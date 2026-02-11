@@ -52,7 +52,7 @@
   opacity: 0.55;
   z-index: 2;
   pointer-events: none;
-  transform: translateY(-50%);
+  transform: translateY(-50%) scale(0.95);
   mix-blend-mode: screen;
   filter: brightness(1.15) contrast(1.15)
           drop-shadow(0 0 28px rgba(120,160,255,0.35))
@@ -67,14 +67,30 @@
     width: 260px;
     opacity: 0.6;
   }
+.company-bookend.left {
+  left: 16%;
+  top: 48%;
+  opacity: 0.65;
+}
 
-  .company-bookend.left {
-    left: 14%;
-  }
+.company-bookend.right {
+  right: 13%;
+  top: 52%;
+  opacity: 0.45;
+}
 
-  .company-bookend.right {
-    right: 14%;
-  }
+/* Depth field behind bookends */
+.company-bookend::after {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  background: radial-gradient(
+    circle,
+    rgba(0,0,0,0.6) 0%,
+    rgba(0,0,0,0.4) 40%,
+    transparent 70%
+  );
+  z-index: -1;
 }
 
     .fracture {
