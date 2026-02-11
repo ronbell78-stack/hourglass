@@ -70,14 +70,23 @@
     /* Mobile adjustments for hero bookends */
 @media (max-width: 600px) {
 
-  .company-bookend {
-    top: 50%;
-    transform: translateY(-50%) scale(0.9);
-    opacity: 0.45;
-  }
+ .company-bookend {
+  width: 140px;
+  top: 50%;
+  transform: translateY(-50%) scale(0.85);
+  opacity: 0.35;
+}
 
-  .company-bookend::after {
-    inset: -15%;
+.company-bookend.left {
+  left: 18%;
+}
+
+.company-bookend.right {
+  right: 18%;
+}
+
+.company-bookend::after {
+  inset: -10%;
   }
 
 }
