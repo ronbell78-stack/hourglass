@@ -42,24 +42,33 @@
       overflow: hidden;
     }
 
-    /* Company seal — embedded */
-    .company-mark {
+    /* Bookend company marks */
+    .company-bookend {
       position: absolute;
-      top: 14%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 68px;
+      top: 50%;
+      width: 120px;
       height: auto;
-      opacity: 0.35;
-      z-index: 2;
+      opacity: 0.22;
+      z-index: 1;
       pointer-events: none;
+      transform: translateY(-50%);
+      filter:
+        drop-shadow(0 0 14px rgba(120,160,255,0.12));
+    }
+
+    .company-bookend.left {
+      left: 6%;
+    }
+
+    .company-bookend.right {
+      right: 6%;
     }
 
     .fracture {
       position: absolute;
       width: min(55vw, 420px);
       opacity: 0.9;
-      z-index: 1;
+      z-index: 2;
 
       filter:
         drop-shadow(0 0 22px rgba(120,160,255,0.35))
@@ -225,8 +234,14 @@
 
     <img
       src="assets/order-in-chaos-logo-mark.png"
-      alt="Order in Chaos company mark"
-      class="company-mark"
+      alt="Order in Chaos"
+      class="company-bookend left"
+    />
+
+    <img
+      src="assets/order-in-chaos-logo-mark.png"
+      alt="Order in Chaos"
+      class="company-bookend right"
     />
 
     <img
