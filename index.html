@@ -59,16 +59,23 @@
           drop-shadow(0 0 80px rgba(120,160,255,0.18));
     mask-image: radial-gradient(ellipse at center, black 55%, rgba(0,0,0,0.7) 70%, transparent 100%);
   -webkit-mask-image: radial-gradient(ellipse at center, black 55%, rgba(0,0,0,0.7) 70%, transparent 100%);
-
+ 
 }
 
-    .company-bookend.left {
-      left: 4%;
-    }
+    @media (min-width: 1200px) {
+  .company-bookend {
+    width: 260px;
+    opacity: 0.6;
+  }
 
-    .company-bookend.right {
-      right: 4%;
-    }
+  .company-bookend.left {
+    left: 14%;
+  }
+
+  .company-bookend.right {
+    right: 14%;
+  }
+}
 
     .fracture {
       position: absolute;
