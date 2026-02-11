@@ -37,11 +37,12 @@ html, body {
   position: relative;
   min-height: 100vh; /* desktop stable */
   width: 100%;
-  display: grid;
-  place-items: center;
+  display: flex;                 /* change from grid */
+  justify-content: center;
+  align-items: flex-start;       /* start instead of center */
   text-align: center;
   overflow: hidden;
-  padding: clamp(4rem, 8vw, 8rem) 1.5rem;
+  padding: clamp(8rem, 14vh, 12rem) 1.5rem 4rem; /* pushes content down */
   isolation: isolate;
 }
 
