@@ -35,14 +35,13 @@ html, body {
 
 .hero {
   position: relative;
-  min-height: 100vh; /* desktop stable */
+  min-height: 100vh;
   width: 100%;
-  display: flex;                 /* change from grid */
-  justify-content: center;
-  align-items: flex-start;       /* start instead of center */
+  display: grid;
+  place-items: center;  /* restore perfect center */
   text-align: center;
   overflow: hidden;
-  padding: clamp(8rem, 14vh, 12rem) 1.5rem 4rem; /* pushes content down */
+  padding: 0 1.5rem;
   isolation: isolate;
 }
 
@@ -84,6 +83,7 @@ html, body {
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
+  transform: translateY(5vh); /* subtle downward bias */
 }
 
 .hero h1 {
