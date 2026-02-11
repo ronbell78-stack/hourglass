@@ -30,7 +30,7 @@
     }
 
     /* ─────────────────────────────
-       HERO — BUSINESS IDENTITY
+       HERO
     ───────────────────────────── */
 
     .hero {
@@ -40,6 +40,19 @@
       place-items: center;
       text-align: center;
       overflow: hidden;
+    }
+
+    /* Company seal — embedded */
+    .company-mark {
+      position: absolute;
+      top: 14%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 68px;
+      height: auto;
+      opacity: 0.35;
+      z-index: 2;
+      pointer-events: none;
     }
 
     .fracture {
@@ -76,7 +89,7 @@
 
     .hero-content {
       position: relative;
-      z-index: 2;
+      z-index: 3;
       padding: 0 1.5rem;
       max-width: 620px;
       margin: 0 auto;
@@ -148,13 +161,6 @@
     /* ─────────────────────────────
        IDENTIFIER MARKS
     ───────────────────────────── */
-.company-mark {
-  display: block;
-  width: 72px;
-  height: auto;
-  margin: 0 auto 1.5rem auto;
-  opacity: 0.55;
-}
 
     .product-mark {
       display: block;
@@ -173,7 +179,7 @@
     }
 
     /* ─────────────────────────────
-       CTA STYLES
+       CTA
     ───────────────────────────── */
 
     .cta {
@@ -209,7 +215,6 @@
       color: var(--fg-muted);
       opacity: 0.6;
     }
-
   </style>
 </head>
 
@@ -217,26 +222,26 @@
 
   <!-- HERO -->
   <section class="hero">
+
+    <img
+      src="assets/order-in-chaos-logo-mark.png"
+      alt="Order in Chaos company mark"
+      class="company-mark"
+    />
+
     <img
       src="assets/fracture-mark-hero-png.png"
-      alt="Order in Chaos Mark"
+      alt="Fracture Mark"
       class="fracture"
     />
 
     <div class="hero-content">
-
-  <img
-    src="assets/order-in-chaos-logo-mark.png"
-    alt="Order in Chaos company mark"
-    class="company-mark"
-  />
-
-  <h1>ORDER IN CHAOS</h1>
-  <p>
-    A doctrine-driven company building tools for
-    high-stakes decision-making for individuals and organizations.
-  </p>
-</div>
+      <h1>ORDER IN CHAOS</h1>
+      <p>
+        A doctrine-driven company building tools for
+        high-stakes decision-making for individuals and organizations.
+      </p>
+    </div>
 
     <div class="scroll">Scroll</div>
   </section>
@@ -258,7 +263,6 @@
   <!-- PRODUCT -->
   <section>
     <div class="content">
-
       <img
         src="assets/hourglass-mark.png"
         alt="Hourglass product mark"
@@ -279,7 +283,6 @@
   <!-- MEDIA -->
   <section class="lift">
     <div class="content">
-
       <img
         src="assets/media-play-icon.svg"
         alt="Media channel icon"
@@ -326,15 +329,12 @@
   </section>
 
   <footer>
- &copy; 2026 Order in Chaos<br>
-  Built in reverence to God, through Christ.<br>
-  <span style="opacity:0.7;">
-  <em>
-    “As iron sharpens iron, so one man sharpens another.” — Proverbs 27:17
-  </em>
-</span>
+    &copy; 2026 Order in Chaos<br>
+    Built in reverence to God, through Christ.<br>
+    <span style="opacity:0.7;">
+      “As iron sharpens iron, so one man sharpens another.” — Proverbs 27:17
+    </span>
+  </footer>
 
-</footer>
-  
 </body>
 </html>
