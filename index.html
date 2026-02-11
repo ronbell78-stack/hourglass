@@ -1,58 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Order in Chaos — Hourglass</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Order in Chaos — Hourglass</title>
 
-  <style>
-    :root {
-      --bg-main: #050507;
-      --bg-section: #0b0d12;
-      --fg-main: #e8e8eb;
-      --fg-muted: #a6a7ad;
-      --accent: #8aa2ff;
-      --rule: rgba(255,255,255,0.08);
-    }
+<style>
+:root {
+  --bg-main: #050507;
+  --bg-section: #0b0d12;
+  --fg-main: #e8e8eb;
+  --fg-muted: #a6a7ad;
+  --accent: #8aa2ff;
+  --rule: rgba(255,255,255,0.08);
+}
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-    html, body {
-      background: var(--bg-main);
-      color: var(--fg-main);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-                   Inter, Helvetica, Arial, sans-serif;
-      scroll-behavior: smooth;
-    }
+html, body {
+  background: var(--bg-main);
+  color: var(--fg-main);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+               Inter, Helvetica, Arial, sans-serif;
+  scroll-behavior: smooth;
+}
 
-    /* ─────────────────────────────
-       HERO
-    ───────────────────────────── */
-
-    /* --------------------------------------------------
+/* ─────────────────────────────
    HERO
--------------------------------------------------- */
+───────────────────────────── */
 
 .hero {
   position: relative;
   min-height: 100svh;
+  width: 100%;
   display: grid;
   place-items: center;
   text-align: center;
   overflow: hidden;
   padding: clamp(4rem, 8vw, 8rem) 1.5rem;
+  isolation: isolate;
 }
 
-/* Background fracture image */
+/* Center fracture properly */
 .fracture {
   position: absolute;
+  top: 50%;
+  left: 50%;
   width: min(70vw, 520px);
+  transform: translate(-50%, -50%);
   opacity: 0.9;
   z-index: 1;
+  pointer-events: none;
+  will-change: transform;
 }
 
 /* Company bookend logos */
@@ -68,15 +71,9 @@
   mix-blend-mode: screen;
 }
 
-.company-bookend.left {
-  left: 12%;
-}
+.company-bookend.left { left: 12%; }
+.company-bookend.right { right: 12%; }
 
-.company-bookend.right {
-  right: 12%;
-}
-
-/* Hero text container */
 .hero-content {
   position: relative;
   z-index: 3;
@@ -100,7 +97,6 @@
   opacity: 0.8;
 }
 
-/* Scroll indicator */
 .scroll {
   position: absolute;
   bottom: 2rem;
@@ -110,36 +106,117 @@
   opacity: 0.5;
 }
 
-/* --------------------------------------------------
-   RESPONSIVE ADJUSTMENTS
--------------------------------------------------- */
+/* ─────────────────────────────
+   SECTIONS
+───────────────────────────── */
+
+section {
+  padding: 6rem 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+section.lift {
+  background: var(--bg-section);
+}
+
+.content {
+  max-width: 680px;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.content h2 {
+  font-size: 1.6rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.content p {
+  margin-bottom: 1.4rem;
+  color: var(--fg-muted);
+}
+
+.rule {
+  width: 48px;
+  height: 1px;
+  background: var(--accent);
+  opacity: 0.6;
+  margin: 2rem auto;
+}
+
+/* Marks */
+
+.product-mark {
+  display: block;
+  width: 64px;
+  margin: 0 auto 1.25rem;
+  opacity: 0.9;
+}
+
+.media-mark {
+  display: block;
+  width: 56px;
+  margin: 0 auto 1.25rem;
+  opacity: 0.85;
+}
+
+/* CTA */
+
+.cta {
+  display: inline-block;
+  padding: 0.9rem 2rem;
+  border: 1px solid rgba(255,255,255,0.25);
+  color: var(--fg-main);
+  text-decoration: none;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  transition: all 0.25s ease;
+}
+
+.cta:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.cta.secondary {
+  opacity: 0.8;
+  font-size: 0.7rem;
+}
+
+/* Footer */
+
+footer {
+  padding: 3rem 1.5rem;
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--fg-muted);
+  opacity: 0.6;
+}
+
+/* ─────────────────────────────
+   RESPONSIVE
+───────────────────────────── */
 
 @media (max-width: 900px) {
 
-  .fracture {
-    width: 80vw;
-  }
+  .fracture { width: 80vw; }
 
   .company-bookend {
     width: 140px;
     opacity: 0.35;
   }
 
-  .company-bookend.left {
-    left: 6%;
-  }
-
-  .company-bookend.right {
-    right: 6%;
-  }
-
+  .company-bookend.left { left: 6%; }
+  .company-bookend.right { right: 6%; }
 }
 
 @media (max-width: 600px) {
 
-  .fracture {
-    width: 95vw;
-  }
+  .hero { min-height: 100dvh; }
+
+  .fracture { width: 95vw; }
 
   .company-bookend {
     width: 100px;
@@ -147,236 +224,112 @@
     top: 55%;
   }
 
-  .company-bookend.left {
-    left: 4%;
-  }
-
-  .company-bookend.right {
-    right: 4%;
-  }
-
-    /* ─────────────────────────────
-       SECTIONS
-    ───────────────────────────── */
-
-    section {
-      padding: 6rem 1.5rem;
-      display: flex;
-      justify-content: center;
-    }
-
-    section.lift {
-      background: var(--bg-section);
-    }
-
-    .content {
-      max-width: 680px;
-      line-height: 1.75;
-      text-align: center;
-    }
-
-    .content h2 {
-      font-size: 1.6rem;
-      font-weight: 500;
-      margin-bottom: 1rem;
-    }
-
-    .content p {
-      margin-bottom: 1.4rem;
-      color: var(--fg-muted);
-    }
-
-    .rule {
-      width: 48px;
-      height: 1px;
-      background: var(--accent);
-      opacity: 0.6;
-      margin: 2rem auto;
-    }
-
-    /* ─────────────────────────────
-       IDENTIFIER MARKS
-    ───────────────────────────── */
-
-    .product-mark {
-      display: block;
-      width: 64px;
-      height: auto;
-      margin: 0 auto 1.25rem auto;
-      opacity: 0.9;
-    }
-
-    .media-mark {
-      display: block;
-      width: 56px;
-      height: auto;
-      margin: 0 auto 1.25rem auto;
-      opacity: 0.85;
-    }
-
-    /* ─────────────────────────────
-       CTA
-    ───────────────────────────── */
-
-    .cta {
-      display: inline-block;
-      padding: 0.9rem 2rem;
-      border: 1px solid rgba(255,255,255,0.25);
-      color: var(--fg-main);
-      text-decoration: none;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      font-size: 0.75rem;
-      transition: all 0.25s ease;
-    }
-
-    .cta:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    .cta.secondary {
-      opacity: 0.8;
-      font-size: 0.7rem;
-    }
-
-    /* ─────────────────────────────
-       FOOTER
-    ───────────────────────────── */
-
-    footer {
-      padding: 3rem 1.5rem;
-      text-align: center;
-      font-size: 0.7rem;
-      color: var(--fg-muted);
-      opacity: 0.6;
-    }
-  </style>
+  .company-bookend.left { left: 4%; }
+  .company-bookend.right { right: 4%; }
+}
+</style>
 </head>
 
 <body>
 
-  <!-- HERO -->
-  <section class="hero">
+<section class="hero">
 
-    <img
-      src="assets/order-in-chaos-logo-mark.png"
-      alt="Order in Chaos"
-      class="company-bookend left"
-    />
+  <img src="assets/order-in-chaos-logo-mark.png"
+       alt="Order in Chaos"
+       class="company-bookend left" />
 
-    <img
-      src="assets/order-in-chaos-logo-mark.png"
-      alt="Order in Chaos"
-      class="company-bookend right"
-    />
+  <img src="assets/order-in-chaos-logo-mark.png"
+       alt="Order in Chaos"
+       class="company-bookend right" />
 
-    <img
-      src="assets/fracture-mark-hero-png.png"
-      alt="Fracture Mark"
-      class="fracture"
-    />
+  <img src="assets/fracture-mark-hero-png.png"
+       alt="Fracture Mark"
+       class="fracture" />
 
-    <div class="hero-content">
-      <h1>ORDER IN CHAOS</h1>
-      <p>
-        A doctrine-driven company building tools for
-        high-stakes decision-making for individuals and organizations.
-      </p>
-    </div>
+  <div class="hero-content">
+    <h1>ORDER IN CHAOS</h1>
+    <p>
+      A doctrine-driven company building tools for
+      high-stakes decision-making for individuals and organizations.
+    </p>
+  </div>
 
-    <div class="scroll">Scroll</div>
-  </section>
+  <div class="scroll">Scroll</div>
+</section>
 
-  <!-- BUSINESS -->
-  <section class="lift">
-    <div class="content">
-      <h2>The Business</h2>
-      <div class="rule"></div>
-      <p>
-        Order in Chaos is the business behind the work.
-        It develops doctrine, media, and decision frameworks
-        for environments where pressure, power, and incentives
-        distort judgment.
-      </p>
-    </div>
-  </section>
+<section class="lift">
+  <div class="content">
+    <h2>The Business</h2>
+    <div class="rule"></div>
+    <p>
+      Order in Chaos develops doctrine, media, and decision frameworks
+      for environments where pressure, power, and incentives distort judgment.
+    </p>
+  </div>
+</section>
 
-  <!-- PRODUCT -->
-  <section>
-    <div class="content">
-      <img
-        src="assets/hourglass-mark.png"
-        alt="Hourglass product mark"
-        class="product-mark"
-      />
+<section>
+  <div class="content">
+    <img src="assets/hourglass-mark.png"
+         alt="Hourglass product mark"
+         class="product-mark" />
 
-      <h2>The Product — Hourglass</h2>
-      <div class="rule"></div>
-      <p>
-        Hourglass is a product developed by Order in Chaos.
-        It is a decision operating system designed for moments
-        where mistakes compound and structure is required
-        before action.
-      </p>
-    </div>
-  </section>
+    <h2>The Product — Hourglass</h2>
+    <div class="rule"></div>
+    <p>
+      Hourglass is a decision operating system designed for moments
+      where mistakes compound and structure is required before action.
+    </p>
+  </div>
+</section>
 
-  <!-- MEDIA -->
-  <section class="lift">
-    <div class="content">
-      <img
-        src="assets/media-play-icon.svg"
-        alt="Media channel icon"
-        class="media-mark"
-      />
+<section class="lift">
+  <div class="content">
+    <img src="assets/media-play-icon.svg"
+         alt="Media channel icon"
+         class="media-mark" />
 
-      <h2>Order in Chaos — YouTube</h2>
-      <div class="rule"></div>
-      <p>
-        Long-form discussions, applied doctrine,
-        and real-world analysis from inside the business.
-      </p>
+    <h2>Order in Chaos — YouTube</h2>
+    <div class="rule"></div>
+    <p>
+      Long-form discussions, applied doctrine,
+      and real-world analysis from inside the business.
+    </p>
 
-      <a
-        href="https://www.youtube.com/@theorderinchaosshow"
-        target="_blank"
-        rel="noopener"
-        class="cta secondary"
-      >
-        Visit the Channel
-      </a>
-    </div>
-  </section>
+    <a href="https://www.youtube.com/@theorderinchaosshow"
+       target="_blank"
+       rel="noopener"
+       class="cta secondary">
+      Visit the Channel
+    </a>
+  </div>
+</section>
 
-  <!-- ENTER PRODUCT -->
-  <section class="lift">
-    <div class="content">
-      <h2>Enter Hourglass</h2>
-      <div class="rule"></div>
-      <p>
-        Complete the worksheet, then use the prompt
-        to analyze your situation without distortion.
-      </p>
+<section class="lift">
+  <div class="content">
+    <h2>Enter Hourglass</h2>
+    <div class="rule"></div>
+    <p>
+      Complete the worksheet, then use the prompt
+      to analyze your situation without distortion.
+    </p>
 
-      <a
-        href="https://ronbreeze8.gumroad.com/l/qzblq"
-        target="_blank"
-        rel="noopener"
-        class="cta"
-      >
-        Access the Hourglass Product
-      </a>
-    </div>
-  </section>
+    <a href="https://ronbreeze8.gumroad.com/l/qzblq"
+       target="_blank"
+       rel="noopener"
+       class="cta">
+      Access the Hourglass Product
+    </a>
+  </div>
+</section>
 
-  <footer>
-    &copy; 2026 Order in Chaos<br>
-    Built in reverence to God, through Christ.<br>
-    <span style="opacity:0.7;">
-      “As iron sharpens iron, so one man sharpens another.” — Proverbs 27:17
-    </span>
-  </footer>
+<footer>
+  &copy; 2026 Order in Chaos<br>
+  Built in reverence to God, through Christ.<br>
+  <span style="opacity:0.7;">
+    “As iron sharpens iron, so one man sharpens another.” — Proverbs 27:17
+  </span>
+</footer>
 
 </body>
 </html>
