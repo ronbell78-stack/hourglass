@@ -44,7 +44,7 @@ html, body {
   isolation: isolate;
 }
 
-/* Fracture Image – Proper Center Geometry */
+/* Fracture Mark */
 .fracture {
   position: absolute;
   top: 50%;
@@ -56,7 +56,7 @@ html, body {
   pointer-events: none;
 }
 
-/* Subtle overlay for text clarity */
+/* Subtle gradient overlay for text clarity */
 .hero::after {
   content: "";
   position: absolute;
@@ -70,17 +70,32 @@ html, body {
   z-index: 2;
 }
 
+/* Bookend Logos */
+.company-bookend {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 200px;
+  opacity: 0.35;
+  z-index: 2;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.company-bookend.left { left: 10%; }
+.company-bookend.right { right: 10%; }
+
+/* Hero Content */
 .hero-content {
   position: relative;
   z-index: 3;
   max-width: 720px;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* Title – Slight lift for glow clearance */
+/* Title */
 .hero h1 {
   font-size: clamp(2.2rem, 6vw, 3.8rem);
   font-weight: 500;
@@ -89,7 +104,7 @@ html, body {
   transform: translateY(-1.5vh);
 }
 
-/* Subtitle spacing */
+/* Subtitle */
 .hero p {
   font-size: clamp(1rem, 2.5vw, 1.15rem);
   line-height: 1.6;
@@ -195,23 +210,25 @@ footer {
 ───────────────────────────── */
 
 @media (max-width: 900px) {
-  .fracture {
-    width: 80vw;
+  .fracture { width: 80vw; }
+
+  .company-bookend {
+    width: 120px;
+    opacity: 0.25;
   }
+
+  .company-bookend.left { left: 5%; }
+  .company-bookend.right { right: 5%; }
 }
 
 @media (max-width: 600px) {
-  .hero {
-    min-height: 100dvh;
-  }
+  .hero { min-height: 100dvh; }
 
-  .fracture {
-    width: 95vw;
-  }
+  .fracture { width: 95vw; }
 
-  .hero h1 {
-    transform: translateY(-1vh);
-  }
+  .company-bookend { display: none; }
+
+  .hero h1 { transform: translateY(-1vh); }
 }
 </style>
 </head>
@@ -223,6 +240,14 @@ footer {
   <img src="assets/fracture-mark-hero-png.png"
        alt="Fracture Mark"
        class="fracture" />
+
+  <img src="assets/order-in-chaos-logo-mark.png"
+       alt="Order in Chaos"
+       class="company-bookend left" />
+
+  <img src="assets/order-in-chaos-logo-mark.png"
+       alt="Order in Chaos"
+       class="company-bookend right" />
 
   <div class="hero-content">
     <h1>ORDER IN CHAOS</h1>
