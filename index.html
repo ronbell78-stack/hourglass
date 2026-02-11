@@ -35,7 +35,7 @@ html, body {
 
 .hero {
   position: relative;
-  min-height: 100svh;
+  min-height: 100vh; /* desktop stable */
   width: 100%;
   display: grid;
   place-items: center;
@@ -213,8 +213,9 @@ footer {
 }
 
 @media (max-width: 600px) {
-
-  .hero { min-height: 100dvh; }
+  .hero {
+    min-height: 100dvh; /* mobile browser safe */
+  }
 
   .fracture { width: 95vw; }
 
@@ -227,6 +228,7 @@ footer {
   .company-bookend.left { left: 4%; }
   .company-bookend.right { right: 4%; }
 }
+
 </style>
 </head>
 
