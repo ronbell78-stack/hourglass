@@ -12,7 +12,6 @@
   --fg-main: #e8e8eb;
   --fg-muted: #a6a7ad;
   --accent: #8aa2ff;
-  --rule: rgba(255,255,255,0.08);
 }
 
 * {
@@ -38,41 +37,38 @@ html, body {
   min-height: 100vh;
   width: 100%;
   display: grid;
-  place-items: center;  /* keep horizontal centering */
+  place-items: center;
   text-align: center;
   overflow: hidden;
   padding: 0 1.5rem;
   isolation: isolate;
 }
 
-/* Center fracture properly */
+/* Fracture Image – Proper Center Geometry */
 .fracture {
   position: absolute;
   top: 50%;
   left: 50%;
   width: min(70vw, 520px);
   transform: translate(-50%, -50%);
-  opacity: 0.9;
+  opacity: 0.95;
   z-index: 1;
   pointer-events: none;
-  will-change: transform;
 }
 
-/* Company bookend logos */
-.company-bookend {
+/* Subtle overlay for text clarity */
+.hero::after {
+  content: "";
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 220px;
-  height: auto;
-  opacity: 0.5;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.35) 0%,
+    rgba(0,0,0,0.25) 40%,
+    rgba(0,0,0,0.45) 100%
+  );
   z-index: 2;
-  pointer-events: none;
-  mix-blend-mode: screen;
 }
-
-.company-bookend.left { left: 12%; }
-.company-bookend.right { right: 12%; }
 
 .hero-content {
   position: relative;
@@ -82,22 +78,23 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
-  margin-top: 8vh;   /* shifts anchor downward */
 }
 
+/* Title – Slight lift for glow clearance */
 .hero h1 {
   font-size: clamp(2.2rem, 6vw, 3.8rem);
   font-weight: 500;
   letter-spacing: 0.08em;
-  transform: translateY(-2vh)
+  margin-bottom: 1rem;
+  transform: translateY(-1.5vh);
 }
 
+/* Subtitle spacing */
 .hero p {
   font-size: clamp(1rem, 2.5vw, 1.15rem);
   line-height: 1.6;
-  opacity: 0.8;
-  margin-top: 1.25rem;   /* pushes subtitle down */
+  opacity: 0.85;
+  max-width: 600px;
 }
 
 .scroll {
@@ -106,7 +103,8 @@ html, body {
   font-size: 0.75rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  opacity: 0.5;
+  opacity: 0.6;
+  z-index: 3;
 }
 
 /* ─────────────────────────────
@@ -148,8 +146,6 @@ section.lift {
   margin: 2rem auto;
 }
 
-/* Marks */
-
 .product-mark {
   display: block;
   width: 64px;
@@ -163,8 +159,6 @@ section.lift {
   margin: 0 auto 1.25rem;
   opacity: 0.85;
 }
-
-/* CTA */
 
 .cta {
   display: inline-block;
@@ -188,8 +182,6 @@ section.lift {
   font-size: 0.7rem;
 }
 
-/* Footer */
-
 footer {
   padding: 3rem 1.5rem;
   text-align: center;
@@ -203,49 +195,30 @@ footer {
 ───────────────────────────── */
 
 @media (max-width: 900px) {
-
-  .fracture { width: 80vw; }
-
-  .company-bookend {
-    width: 140px;
-    opacity: 0.35;
+  .fracture {
+    width: 80vw;
   }
-
-  .company-bookend.left { left: 6%; }
-  .company-bookend.right { right: 6%; }
 }
 
 @media (max-width: 600px) {
   .hero {
-    min-height: 100dvh; /* mobile browser safe */
+    min-height: 100dvh;
   }
 
-  .fracture { width: 95vw; }
-
-  .company-bookend {
-    width: 100px;
-    opacity: 0.25;
-    top: 55%;
+  .fracture {
+    width: 95vw;
   }
 
-  .company-bookend.left { left: 4%; }
-  .company-bookend.right { right: 4%; }
+  .hero h1 {
+    transform: translateY(-1vh);
+  }
 }
-
 </style>
 </head>
 
 <body>
 
 <section class="hero">
-
-  <img src="assets/order-in-chaos-logo-mark.png"
-       alt="Order in Chaos"
-       class="company-bookend left" />
-
-  <img src="assets/order-in-chaos-logo-mark.png"
-       alt="Order in Chaos"
-       class="company-bookend right" />
 
   <img src="assets/fracture-mark-hero-png.png"
        alt="Fracture Mark"
@@ -254,8 +227,8 @@ footer {
   <div class="hero-content">
     <h1>ORDER IN CHAOS</h1>
     <p>
-      A doctrine-driven company building tools for
-      high-stakes decision-making for individuals and organizations.
+      A doctrine-driven company building tools for high-stakes decision-making
+      for individuals and organizations.
     </p>
   </div>
 
