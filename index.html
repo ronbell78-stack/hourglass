@@ -1,39 +1,133 @@
-/* ─────────────────────────────
-      IDENTIFIER MARKS
-   ───────────────────────────── */
-.company-mark {
-  display: block;
-  width: 72px;
-  height: auto;
-  margin: 0 auto 1.5rem auto;
-  opacity: 0.55;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order in Chaos — Hourglass</title>
 
-.product-mark {
-display: block;
-@@ -217,12 +224,19 @@
-/>
+  <style>
+    :root {
+      --bg-black: #050505;
+      --glow-soft: 0 0 18px rgba(120,180,255,0.15);
+      --glow-core: 0 0 40px rgba(120,180,255,0.35);
+    }
 
-<div class="hero-content">
-      <h1>ORDER IN CHAOS</h1>
-      <p>
-        A doctrine-driven company building tools for
-        high-stakes decision-making for individuals and organizations.
-      </p>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: radial-gradient(circle at center, #070b14 0%, #030303 70%);
+      color: white;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      min-height: 100vh;
+    }
+
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 4rem 3rem;
+    }
+
+    .hero-frame {
+      display: grid;
+      grid-template-columns: minmax(180px, 260px) auto minmax(220px, 300px);
+      align-items: center;
+      gap: 4rem;
+      max-width: 1400px;
+      width: 100%;
+    }
+
+    /* LEFT — ORDER IN CHAOS (SUBORDINATE) */
+    .hero-brand {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      opacity: 0.55;
+      transform: translateY(18px);
+    }
+
+    .hero-brand img {
+      max-width: 170px;
+      width: 100%;
+      filter: drop-shadow(0 0 10px rgba(120,180,255,0.08));
+    }
+
+    /* CENTER — FRACTURE (DOMINANT) */
+    .hero-fracture {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-fracture img {
+      max-width: 520px;
+      width: 100%;
+      filter: drop-shadow(var(--glow-core));
+    }
+
+    /* RIGHT — HOURGLASS (PRIMARY PRODUCT) */
+    .hero-product {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      transform: translateY(-10px);
+    }
+
+    .hero-product img {
+      max-width: 240px;
+      width: 100%;
+      filter: drop-shadow(var(--glow-soft));
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero-frame {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        text-align: center;
+      }
+
+      .hero-brand,
+      .hero-product {
+        justify-content: center;
+        transform: none;
+      }
+
+      .hero-brand {
+        opacity: 0.6;
+      }
+
+      .hero-fracture img {
+        max-width: 420px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <section class="hero">
+    <div class="hero-frame">
+
+      <div class="hero-brand">
+        <img src="assets/order-in-chaos-logo-mark.png" alt="Order in Chaos" />
+      </div>
+
+      <div class="hero-fracture">
+        <img src="assets/fracture-mark-hero-png.png" alt="Fracture Mark" />
+      </div>
+
+      <div class="hero-product">
+        <img src="assets/hourglass-mark.png" alt="Hourglass" />
+      </div>
+
     </div>
+  </section>
 
-  <img
-    src="assets/order-in-chaos-logo-mark.png"
-    alt="Order in Chaos company mark"
-    class="company-mark"
-  />
-
-  <h1>ORDER IN CHAOS</h1>
-  <p>
-    A doctrine-driven company building tools for
-    high-stakes decision-making for individuals and organizations.
-  </p>
-</div>
-
-<div class="scroll">Scroll</div>
-</section>
+</body>
+</html>
