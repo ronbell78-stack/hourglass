@@ -44,17 +44,18 @@
 
     /* Bookend company marks */
     .company-bookend {
-      position: absolute;
-      top: 50%;
-      width: 120px;
-      height: auto;
-      opacity: 0.22;
-      z-index: 1;
-      pointer-events: none;
-      transform: translateY(-50%);
-      filter:
-        drop-shadow(0 0 14px rgba(120,160,255,0.12));
-    }
+  position: absolute;
+  top: 50%;
+  width: 180px;                /* ENLARGED */
+  height: auto;
+  opacity: 0.38;               /* MORE PRESENT, STILL SUBORDINATE */
+  z-index: 1;
+  pointer-events: none;
+  transform: translateY(-50%);
+  filter:
+    drop-shadow(0 0 18px rgba(120,160,255,0.18))
+    drop-shadow(0 0 48px rgba(120,160,255,0.12));
+}
 
     .company-bookend.left {
       left: 6%;
