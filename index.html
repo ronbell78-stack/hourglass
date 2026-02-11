@@ -42,31 +42,38 @@ html, body {
   overflow: hidden;
   padding: 0 1.5rem;
   isolation: isolate;
+  background: radial-gradient(
+    circle at center,
+    #0a0f1c 0%,
+    #050507 60%
+  );
 }
 
-/* Fracture Mark */
+/* Fracture Mark — fully centered, integrated */
 .fracture {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: min(70vw, 520px);
+  width: min(80vw, 650px);
   transform: translate(-50%, -50%);
   opacity: 0.95;
   z-index: 1;
   pointer-events: none;
+  filter: drop-shadow(0 0 60px rgba(0,120,255,0.25));
 }
 
-/* Subtle gradient overlay for text clarity */
+/* Atmospheric edge integration */
 .hero::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0,0,0,0.35) 0%,
-    rgba(0,0,0,0.25) 40%,
-    rgba(0,0,0,0.45) 100%
-  );
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(0,0,0,0.1) 0%,
+      rgba(0,0,0,0.35) 60%,
+      rgba(0,0,0,0.75) 100%
+    );
   z-index: 2;
 }
 
@@ -76,7 +83,7 @@ html, body {
   top: 50%;
   transform: translateY(-50%);
   width: 200px;
-  opacity: 0.35;
+  opacity: 0.28;
   z-index: 2;
   pointer-events: none;
   mix-blend-mode: screen;
@@ -112,6 +119,7 @@ html, body {
   max-width: 600px;
 }
 
+/* Scroll */
 .scroll {
   position: absolute;
   bottom: 2rem;
@@ -123,98 +131,15 @@ html, body {
 }
 
 /* ─────────────────────────────
-   SECTIONS
-───────────────────────────── */
-
-section {
-  padding: 6rem 1.5rem;
-  display: flex;
-  justify-content: center;
-}
-
-section.lift {
-  background: var(--bg-section);
-}
-
-.content {
-  max-width: 680px;
-  line-height: 1.75;
-  text-align: center;
-}
-
-.content h2 {
-  font-size: 1.6rem;
-  font-weight: 500;
-  margin-bottom: 1rem;
-}
-
-.content p {
-  margin-bottom: 1.4rem;
-  color: var(--fg-muted);
-}
-
-.rule {
-  width: 48px;
-  height: 1px;
-  background: var(--accent);
-  opacity: 0.6;
-  margin: 2rem auto;
-}
-
-.product-mark {
-  display: block;
-  width: 64px;
-  margin: 0 auto 1.25rem;
-  opacity: 0.9;
-}
-
-.media-mark {
-  display: block;
-  width: 56px;
-  margin: 0 auto 1.25rem;
-  opacity: 0.85;
-}
-
-.cta {
-  display: inline-block;
-  padding: 0.9rem 2rem;
-  border: 1px solid rgba(255,255,255,0.25);
-  color: var(--fg-main);
-  text-decoration: none;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  font-size: 0.75rem;
-  transition: all 0.25s ease;
-}
-
-.cta:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-.cta.secondary {
-  opacity: 0.8;
-  font-size: 0.7rem;
-}
-
-footer {
-  padding: 3rem 1.5rem;
-  text-align: center;
-  font-size: 0.7rem;
-  color: var(--fg-muted);
-  opacity: 0.6;
-}
-
-/* ─────────────────────────────
    RESPONSIVE
 ───────────────────────────── */
 
 @media (max-width: 900px) {
-  .fracture { width: 80vw; }
+  .fracture { width: 85vw; }
 
   .company-bookend {
     width: 120px;
-    opacity: 0.25;
+    opacity: 0.2;
   }
 
   .company-bookend.left { left: 5%; }
@@ -224,12 +149,16 @@ footer {
 @media (max-width: 600px) {
   .hero { min-height: 100dvh; }
 
-  .fracture { width: 95vw; }
+  .fracture {
+    width: 95vw;
+    filter: drop-shadow(0 0 40px rgba(0,120,255,0.25));
+  }
 
   .company-bookend { display: none; }
 
   .hero h1 { transform: translateY(-1vh); }
 }
+
 </style>
 </head>
 
