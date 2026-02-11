@@ -27,6 +27,7 @@ html, body {
                Inter, Helvetica, Arial, sans-serif;
   scroll-behavior: smooth;
 }
+
 /* ─────────────────────────────
    HERO
 ───────────────────────────── */
@@ -43,7 +44,7 @@ html, body {
   isolation: isolate;
 }
 
-/* Fracture image */
+/* Fracture Mark */
 .fracture {
   position: absolute;
   top: 50%;
@@ -55,13 +56,26 @@ html, body {
   pointer-events: none;
 }
 
-/* Bookend logos */
+/* Subtle gradient overlay for text clarity */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.35) 0%,
+    rgba(0,0,0,0.25) 40%,
+    rgba(0,0,0,0.45) 100%
+  );
+  z-index: 2;
+}
+
+/* Bookend Logos */
 .company-bookend {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   width: 200px;
-  height: auto;
   opacity: 0.35;
   z-index: 2;
   pointer-events: none;
@@ -71,7 +85,7 @@ html, body {
 .company-bookend.left { left: 10%; }
 .company-bookend.right { right: 10%; }
 
-/* Hero content */
+/* Hero Content */
 .hero-content {
   position: relative;
   z-index: 3;
@@ -98,7 +112,6 @@ html, body {
   max-width: 600px;
 }
 
-/* Scroll indicator */
 .scroll {
   position: absolute;
   bottom: 2rem;
@@ -109,17 +122,103 @@ html, body {
   z-index: 3;
 }
 
-/* Responsive */
+/* ─────────────────────────────
+   SECTIONS
+───────────────────────────── */
+
+section {
+  padding: 6rem 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+section.lift {
+  background: var(--bg-section);
+}
+
+.content {
+  max-width: 680px;
+  line-height: 1.75;
+  text-align: center;
+}
+
+.content h2 {
+  font-size: 1.6rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.content p {
+  margin-bottom: 1.4rem;
+  color: var(--fg-muted);
+}
+
+.rule {
+  width: 48px;
+  height: 1px;
+  background: var(--accent);
+  opacity: 0.6;
+  margin: 2rem auto;
+}
+
+.product-mark {
+  display: block;
+  width: 64px;
+  margin: 0 auto 1.25rem;
+  opacity: 0.9;
+}
+
+.media-mark {
+  display: block;
+  width: 56px;
+  margin: 0 auto 1.25rem;
+  opacity: 0.85;
+}
+
+.cta {
+  display: inline-block;
+  padding: 0.9rem 2rem;
+  border: 1px solid rgba(255,255,255,0.25);
+  color: var(--fg-main);
+  text-decoration: none;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  transition: all 0.25s ease;
+}
+
+.cta:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.cta.secondary {
+  opacity: 0.8;
+  font-size: 0.7rem;
+}
+
+footer {
+  padding: 3rem 1.5rem;
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--fg-muted);
+  opacity: 0.6;
+}
+
+/* ─────────────────────────────
+   RESPONSIVE
+───────────────────────────── */
+
 @media (max-width: 900px) {
   .fracture { width: 80vw; }
 
   .company-bookend {
-    width: 140px;
+    width: 120px;
     opacity: 0.25;
   }
 
-  .company-bookend.left { left: 6%; }
-  .company-bookend.right { right: 6%; }
+  .company-bookend.left { left: 5%; }
+  .company-bookend.right { right: 5%; }
 }
 
 @media (max-width: 600px) {
@@ -131,7 +230,6 @@ html, body {
 
   .hero h1 { transform: translateY(-1vh); }
 }
-
 </style>
 </head>
 
